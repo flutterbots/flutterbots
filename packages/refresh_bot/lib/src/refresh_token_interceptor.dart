@@ -21,7 +21,6 @@ typedef TokenHeaderBuilder<T> = Map<String, String> Function(T token);
 class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   /// This function call when the token end, Its return new token
   final RefreshToken<T> refreshToken;
-  final TokenReader<T>? tokenReader;
 
   /// Interface Api class to
   final TokenStorage<T> tokenStorage;
@@ -35,29 +34,22 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   //We need this [_tokenDio] client for refresh token
   final Dio _tokenDio;
 
-  // save request token in map using [RequestOptions] hash code
-  // compare map token with storage token to avoid unnecessary refresh token
-  // if you use  custom token model make sure you implement equal operator `==` in the right way
-  final Map<int, T?> _activeRequestTokens;
-
   RefreshTokenInterceptor({
     required this.dio,
     required this.tokenStorage,
     required this.refreshToken,
-    this.tokenReader,
     this.protocol = const TokenProtocol(),
     Dio? tokenDio,
     this.tokenHeaderBuilder,
-  })  : _tokenDio = tokenDio ?? Dio(dio.options),
-        _activeRequestTokens = {};
+  }) : _tokenDio = tokenDio ?? Dio(dio.options);
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     final token = await tokenStorage.read();
-    _activeRequestTokens[options.hashCode] = token;
     if (token != null) {
       options.headers.addAll(_headersBuilder(token));
+      options.token = token;
     }
     options.hashCode;
     handler.next(options);
@@ -75,8 +67,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     }
 
     //if current storageToken  not equal request headerToken => refreshToken has done by another intercept process
-    final headerToken = _activeRequestTokens[err.requestOptions.hashCode];
-    if (storageToken != headerToken) {
+    if (storageToken != err.requestOptions.token) {
       //retry with new storageToken
       await _requestRetry(err.requestOptions, dio).then((response) {
         // complete the request with Response object and other error interceptor(s) will not be executed.
@@ -91,12 +82,6 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     }
   }
 
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    _removeToken(response.requestOptions);
-    handler.next(response);
-  }
-
   Future<void> _refreshToken(
       T token, DioError error, ErrorInterceptorHandler handler) async {
     refreshToken(token, _tokenDio).then((newToken) async {
@@ -104,7 +89,6 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
       _requestRetry(error.requestOptions, dio).then((response) {
         // complete the request with Response object and other error interceptor(s) will not be executed.
         handler.resolve(response);
-        _removeToken(error.requestOptions);
       }).catchError((error, stackTrace) {
         //retry error
         //when error occur, continue to call the next error interceptor.
@@ -124,10 +108,6 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
 
   _requestRetry(RequestOptions requestOptions, Dio dio) {
     return dio.fetch(requestOptions);
-  }
-
-  _removeToken(RequestOptions requestOptions) {
-    _activeRequestTokens.remove(requestOptions.hashCode);
   }
 
   Map<String, String> _headersBuilder(T token) {
@@ -161,4 +141,12 @@ class TokenProtocol<T extends AuthToken> {
     final response = error.response;
     return response?.statusCode == 403 || response?.statusCode == 401;
   }
+}
+
+extension RequestOptionsExtention on RequestOptions {
+  static const _kTokenKey = 'auth-token';
+
+  set token(AuthToken? token) => extra[_kTokenKey] = token;
+
+  AuthToken? get token => extra[_kTokenKey] as AuthToken?;
 }

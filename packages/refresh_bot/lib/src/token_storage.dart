@@ -76,18 +76,10 @@ class AuthToken {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
       other is AuthToken &&
-          runtimeType == other.runtimeType &&
-          accessToken == other.accessToken &&
-          tokenType == other.tokenType &&
-          refreshToken == other.refreshToken &&
-          expiresIn == other.expiresIn;
-
-  @override
-  int get hashCode =>
-      accessToken.hashCode ^
-      tokenType.hashCode ^
-      refreshToken.hashCode ^
-      expiresIn.hashCode;
+      runtimeType == other.runtimeType &&
+      accessToken == other.accessToken &&
+      tokenType == other.tokenType &&
+      refreshToken == other.refreshToken &&
+      expiresIn == other.expiresIn;
 }
