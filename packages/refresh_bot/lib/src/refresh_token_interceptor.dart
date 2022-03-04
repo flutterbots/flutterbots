@@ -51,7 +51,6 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
       options.headers.addAll(_headersBuilder(token));
       options.token = token;
     }
-    options.hashCode;
     handler.next(options);
   }
 
