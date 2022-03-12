@@ -4,7 +4,7 @@ import 'dart:async';
 /// read, write, and delete the `Token`.
 abstract class TokenStorage<T extends AuthToken> {
   /// Returns the stored token.
-  FutureOr<T?> read();
+  T? read();
 
   /// Saves the provided [token] asynchronously.
   FutureOr<void> write(T? token);
@@ -15,11 +15,7 @@ abstract class TokenStorage<T extends AuthToken> {
 
 abstract class MemoryTokenStorage<T extends AuthToken>
     implements TokenStorage<T> {
-  MemoryTokenStorage() {
-    authToken = initTokenValue;
-  }
-
-  late T? authToken;
+  T? authToken;
 
   @override
   FutureOr<void> delete(String? message) {
@@ -27,7 +23,7 @@ abstract class MemoryTokenStorage<T extends AuthToken>
   }
 
   @override
-  FutureOr<T?> read() {
+  T? read() {
     return authToken;
   }
 
@@ -35,8 +31,6 @@ abstract class MemoryTokenStorage<T extends AuthToken>
   FutureOr<void> write(T? token) {
     authToken = token;
   }
-
-  T? get initTokenValue;
 }
 
 class AuthToken {

@@ -28,14 +28,15 @@ class AuthStatus {
       AuthStatus(status: Status.unauthenticated, message: message);
 }
 
-mixin ReactiveAuthStatusMixin<T extends AuthToken> on MemoryTokenStorage<T> {
+mixin ReactiveAuthStatusMixin<T extends AuthToken> on TokenStorage<T> {
   AuthStatus _authState = AuthStatus.initial();
 
   late final StreamController<AuthStatus> _controller =
       StreamController<AuthStatus>.broadcast()..add(_authState);
 
   Stream<AuthStatus> get authenticationStatus async* {
-    yield _getStatus(initTokenValue);
+    _authState = _getStatus(read());
+    yield _authState;
     yield* _controller.stream;
   }
 
@@ -69,13 +70,11 @@ mixin ReactiveAuthStatusMixin<T extends AuthToken> on MemoryTokenStorage<T> {
   @override
   FutureOr<void> write(T? token) {
     setToken(token);
-    return super.write(token);
   }
 
   @mustCallSuper
   @override
   FutureOr<void> delete(String? message) {
     revokeToken(message);
-    return super.delete(message);
   }
 }
