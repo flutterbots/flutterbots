@@ -10,12 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^4.0.4
+  dio: ^4.0.6
+  bot_storage:
+    path: ../bot_storage
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  very_good_analysis: ^2.4.0
 
 
 
