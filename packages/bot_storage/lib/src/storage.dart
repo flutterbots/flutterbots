@@ -1,5 +1,19 @@
 import 'dart:async';
 
+import 'package:meta/meta.dart';
+import 'package:rxdart/rxdart.dart';
+
+/// Callback for read value
+typedef ReadCallback<T> = T Function();
+
+/// Callback for Write a new value
+typedef WriteCallback<T> = FutureOr<void> Function(T? value);
+
+/// Callback for delete stored value
+typedef DeleteCallback<T> = FutureOr<void> Function();
+
+/// An interface which must be implemented to
+/// read, write, and delete the `value`.
 abstract class BotStorage<T> {
   /// Returns the stored data.
   T? read();
@@ -11,7 +25,11 @@ abstract class BotStorage<T> {
   FutureOr<void> delete();
 }
 
-abstract class BotMemoryStorage<T> extends BotStorage<T> {
+/// Memory storage implementation for [BotStorage]
+/// read, write, and delete the `value` from memory
+class BotMemoryStorage<T> extends BotStorage<T> with BotStorageMixin<T> {
+  /// The current value saved in the memory
+  @override
   late T? value = initValue;
 
   @override
@@ -20,14 +38,83 @@ abstract class BotMemoryStorage<T> extends BotStorage<T> {
   }
 
   @override
-  FutureOr<void> write(T? value) {
+  void write(T? value) {
+    super.write(value);
     this.value = value;
   }
 
   @override
-  FutureOr<void> delete() {
+  void delete() {
+    super.delete();
     value = null;
   }
 
-  T? get initValue => value;
+  /// To provide init value for the [BotMemoryStorage]
+  T? get initValue => null;
+}
+
+/// A wrapper concrete class for [BotStorage] interface
+class BotStorageWrapper<T> extends BotStorage<T> with BotStorageMixin<T> {
+  /// Provide [read], [write] and [delete] callbacks
+  /// instead of implementing [BotStorage] interface directly
+  BotStorageWrapper({
+    required ReadCallback<T> read,
+    required WriteCallback<T> write,
+    required DeleteCallback<T> delete,
+  })  : _read = read,
+        _write = write,
+        _delete = delete;
+
+  final ReadCallback<T> _read;
+  final WriteCallback<T> _write;
+  final DeleteCallback<T> _delete;
+
+  @override
+  T? read() {
+    return _read();
+  }
+
+  @override
+  FutureOr<void> write(T? value) {
+    super.write(value);
+    return _write(value);
+  }
+
+  @override
+  FutureOr<void> delete() {
+    super.delete();
+    return _delete();
+  }
+}
+
+/// Mixin that added reactive behavior to [BotStorage]
+mixin BotStorageMixin<T> on BotStorage<T> {
+  late T? _value = read();
+
+  late final BehaviorSubject<T?> _controller =
+      BehaviorSubject<T?>.seeded(_value);
+
+  /// Notifies about changes to any [value] updates.
+  Stream<T?> get stream => _controller.stream;
+
+  /// Get the current value.
+  T? get value => _value;
+
+  @override
+  @mustCallSuper
+  void write(T? value) {
+    _controller.add(value);
+  }
+
+  @override
+  @mustCallSuper
+  void delete() {
+    _controller.add(null);
+    _value = null;
+  }
+
+  /// Close the auth stream controller.
+  void close() {
+    _controller.close();
+  }
 }
