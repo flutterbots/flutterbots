@@ -93,14 +93,14 @@ mixin RefreshBotMixin<T extends AuthToken> on BotStorageMixin<T> {
   @mustCallSuper
   @override
   FutureOr<void> write(T? token) async {
-    await super.write(value);
+    super.write(value);
     _setToken(token);
   }
 
   @mustCallSuper
   @override
   FutureOr<void> delete([String? message]) async {
-    await super.delete();
+    super.delete();
     _revokeToken(message);
   }
 }

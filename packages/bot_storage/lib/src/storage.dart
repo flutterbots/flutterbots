@@ -38,13 +38,13 @@ class BotMemoryStorage<T> extends BotStorage<T> with BotStorageMixin<T> {
   }
 
   @override
-  void write(T? value) {
+  FutureOr<void> write(T? value) {
     super.write(value);
     this.value = value;
   }
 
   @override
-  void delete() {
+  FutureOr<void> delete() {
     super.delete();
     value = null;
   }
