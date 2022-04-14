@@ -65,7 +65,7 @@ void main() async {
 
 }
 ```
-You can use BotStorageWrapper Concreate class
+You can use `BotStorageWrapper` Concrete class 
 ```dart
 void main(){
   final BotStorageWrapper botStorageWrapper = BotStorageWrapper<String>(
