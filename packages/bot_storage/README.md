@@ -1,5 +1,5 @@
 # :robot: Bot Storage
-[![pub package][pub_badge]][pub_badge_link][![style: very good analysis][vgv_badge]][vgv_badge_link][![License: MIT][license_badge]][license_badge_link]
+[![pub package][pub_badge]][pub_badge_link] [![style: very good analysis][vgv_badge]][vgv_badge_link] [![License: MIT][license_badge]][license_badge_link]
 
 A useful package provide an interface to handle read, write and delete operations in reactive way.
 
@@ -88,10 +88,11 @@ void main(){
  
 ```
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license_badge_link]: https://opensource.org/licenses/MIT
 [vgv_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
+[vgv_badge_link]: https://pub.dev/packages/very_good_analysis
 [pub_badge]: https://img.shields.io/badge/pub-1.0.1-blue
 [pub_badge_link]: https://pub.dartlang.org/packages/bot_storage
-[vgv_badge_link]: https://pub.dev/packages/very_good_analysis
 
 
 
