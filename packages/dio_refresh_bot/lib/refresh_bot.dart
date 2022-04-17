@@ -1,4 +1,4 @@
-library refresh_bot;
+library dio_refresh_bot;
 
 export 'src/interceptor.dart';
 export 'src/mixin.dart';

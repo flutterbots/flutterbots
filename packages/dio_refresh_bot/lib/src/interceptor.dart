@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:refresh_bot/src/token_storage.dart';
+import 'package:dio_refresh_bot/src/token_storage.dart';
 
 /// Function for refresh token and return a new one
 typedef RefreshToken<T> = Future<T> Function(T token, Dio tokenDio);

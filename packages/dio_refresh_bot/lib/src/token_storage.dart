@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bot_storage/bot_storage.dart';
-import 'package:refresh_bot/refresh_bot.dart';
+import 'package:dio_refresh_bot/refresh_bot.dart';
 
 /// An interface which must be implemented to
 /// read, write, and delete the `Token`.
