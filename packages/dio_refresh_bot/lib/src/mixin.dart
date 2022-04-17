@@ -29,8 +29,7 @@ class AuthStatus {
   factory AuthStatus.initial() => const AuthStatus(status: Status.initial);
 
   /// Factory for return [AuthStatus] in authenticated status
-  factory AuthStatus.authenticated() =>
-      const AuthStatus(status: Status.authenticated);
+  factory AuthStatus.authenticated() => const AuthStatus(status: Status.authenticated);
 
   /// Factory for return [AuthStatus] in unauthenticated status
   /// and provide a message for unauthenticated status reason
@@ -40,10 +39,10 @@ class AuthStatus {
   /// Current user status
   final Status status;
 
-  /// This message describe the current user status
+  /// This message describes the current user status
   ///
   /// it is helpful in [AuthStatus.unauthenticated] to describe
-  /// why user is logged out (revoked or simple logout....)
+  /// why the user is logged out (revoked or simple logout....)
   final String? message;
 }
 
@@ -51,8 +50,8 @@ class AuthStatus {
 mixin RefreshBotMixin<T extends AuthToken> on BotStorageMixin<T> {
   AuthStatus _authState = AuthStatus.initial();
 
-  late final StreamController<AuthStatus> _controller =
-      StreamController<AuthStatus>.broadcast()..add(_authState);
+  late final StreamController<AuthStatus> _controller = StreamController<AuthStatus>.broadcast()
+    ..add(_authState);
 
   ///
   Stream<AuthStatus> get authenticationStatus async* {
@@ -84,9 +83,7 @@ mixin RefreshBotMixin<T extends AuthToken> on BotStorageMixin<T> {
   }
 
   AuthStatus _getStatus(T? token) {
-    return _authState = token != null
-        ? AuthStatus.authenticated()
-        : AuthStatus.unauthenticated();
+    return _authState = token != null ? AuthStatus.authenticated() : AuthStatus.unauthenticated();
   }
 
   @mustCallSuper
