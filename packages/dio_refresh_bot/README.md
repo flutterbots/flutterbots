@@ -1,12 +1,11 @@
+## Refresh Token For Dio
+
+
 dio_refresh_bot is an interceptor that attempts to simplify custom API authentication by transparently integrating token refresh and caching. 
 
 dio_refresh_bot: is flexible and is intended to support custom token refresh mechanisms.
 
 A [dio](https://pub.dev/packages/dio) interceptor for a built-in token refresh.
-
-## Features
-
-- save 
 
 ## Getting started
 
