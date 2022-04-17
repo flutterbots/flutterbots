@@ -14,7 +14,7 @@ typedef ShouldRefresh<T> = bool Function(
 /// Function to decide when we should revoke the token depending on [DioError]
 typedef ShouldRevoke = bool Function(DioError error);
 
-/// Function for Take an action when token is revoked
+/// Function for Taking the the an action when the token is revoked
 ///
 /// from this function we can return meaningful message
 typedef RevokeCallback = String? Function(DioError error);
@@ -35,12 +35,14 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     this.tokenHeaderBuilder,
   }) : _tokenDio = tokenDio ?? Dio(dio.options);
 
-  /// This function called when we should refresh token and Its return new token
+  /// This function called when we should refresh the token
+  /// and Its returns a new token
   ///
   /// refer to [TokenProtocol] for shouldRefresh
   final RefreshToken<T> refreshToken;
 
-  /// This function will triggered if token revoked and refresh token is failed
+  /// This function will be triggered if the token revoked
+  /// and the refresh token is failed
   ///
   /// refer to [TokenProtocol] for shouldRevoke
   final RevokeCallback? onRevoked;
@@ -48,10 +50,10 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   /// Interface API class to read, write and delete token from storage or memory
   final BotTokenStorage<T> tokenStorage;
 
-  /// Function for build custom token header depending on stored token
+  /// Function for building custom token header depending on storing token
   final TokenHeaderBuilder? tokenHeaderBuilder;
 
-  /// The dio client we use for http calls and we added this interceptor to it
+  /// The dio client we use for HTTP calls and we added this interceptor to it
   ///
   /// used for retry and copy its options to [_tokenDio] if token dio
   /// not provided
@@ -151,7 +153,7 @@ class TokenProtocol<T extends AuthToken> {
   /// If refresh token throw [DioError] we should revoke the
   /// token for specific errors
   ///
-  /// the default when response status code is 403 or 401
+  /// the default when the response status code is 403 or 401
   /// we can optionally return a reason message or null
   final ShouldRevoke shouldRevokeToken;
 

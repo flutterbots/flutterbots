@@ -57,7 +57,7 @@ class AuthToken {
   /// The type of token, the default is “bearer”.
   final String tokenType;
 
-  /// Token which can used to obtain another access token.
+  /// Token which can be used to obtain another access token.
   final String? refreshToken;
 
   ///
