@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:dio_refresh_bot/refresh_bot.dart';
+import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 
 // ignore_for_file: avoid_print
 void main() {

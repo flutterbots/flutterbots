@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment=":truck: rename refresh_bot package">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment=":recycle: melos bootstrap">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/melos.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/melos.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/.metadata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/analysis_options.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/example/example.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/example/example.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/lib/refresh_bot.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/refresh_bot.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/lib/src/interceptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/lib/src/mixin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/lib/src/token_storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650170109251</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary=":recycle: melos bootstrap">
+      <created>1650170249231</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1650170249231</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -240,7 +234,8 @@
     <MESSAGE value="chore: add workspace.iml" />
     <MESSAGE value="chore:  add license" />
     <MESSAGE value=":truck: rename refresh_bot package" />
-    <option name="LAST_COMMIT_MESSAGE" value=":truck: rename refresh_bot package" />
+    <MESSAGE value=":recycle: melos bootstrap" />
+    <option name="LAST_COMMIT_MESSAGE" value=":recycle: melos bootstrap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
