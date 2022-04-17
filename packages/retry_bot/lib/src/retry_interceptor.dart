@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:packages.retry_bot/src/dio_connectivity_request.dart';
+
+import 'package:retry_bot/src/dio_connectivity_request.dart';
 
 ///
 class OnRetryConnection extends Interceptor {
