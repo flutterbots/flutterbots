@@ -1,39 +1,97 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+dio_refresh_bot is an interceptor that attempts to simplify custom API authentication by transparently integrating token refresh and caching. 
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+dio_refresh_bot: is flexible and is intended to support custom token refresh mechanisms.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A [dio](https://pub.dev/packages/dio) interceptor for a built-in token refresh.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- save 
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### Add dependency [#](https://pub.dev/packages/dio_refresh_bot#add-dependency)
+
+```yaml
+dependencies:
+  dio_refresh_bot: ^1.0.0 #latest version
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+- Create a new instance from Dio
 
 ```dart
-const like = 'sample';
+final dio = Dio();
 ```
+
+- Creat new class whose has extends from  BotMemoryTokenStorage<AuthToken>
+
+```dart
+class TokenStorageImpl extends BotMemoryTokenStorage<AuthToken> {}
+```
+
+and you will get override AuthToken init
+
+```dart
+// and you will get overrid AuthToken init
+@override
+  AuthToken? get initValue => const AuthToken(
+        accessToken: '<Your Initial Access Token>',
+        refreshToken: '<Your Initial Refresh Token>',
+        tokenType: '<Your Initial Token Type>',
+        // You Can make the token expire in your code
+        // without expiring it from the API call (Optional)
+        expiresIn: Duration(days: 1),
+      );
+```
+
+or 
+
+```dart
+@override
+AuthToken? get initValue => null;
+```
+
+- Then Create a new intance from TokenStorageImpl 
+
+```dart
+  final storage = TokenStorageImpl();
+```
+
+- Then Add RefreshTokenInterceptor to Dio Interceptors 
+
+```dart
+  dio.interceptors.add(
+    RefreshTokenInterceptor<AuthToken>(
+      // pass your dio instance 
+      dio: dio,
+      // pass your storage instance 
+      tokenStorage: storage,
+      // we have sperable instance for Dio
+      // [tokenDio] you can get your dio instance for refresh method
+			// [token] is AuthToken object storage
+      refreshToken: (token, tokenDio) async {
+        final response = await tokenDio.post<dynamic>(
+          '/refresh',
+          data: {'refreshToken': token.refreshToken},
+        );
+        return AuthToken.fromMap(response.data as Map<String, dynamic>);
+      },
+    ),
+  );
+```
+
+
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+We add listen for your storage when your token has [ Created, Updated, or Deleted ]
+
+```dart
+// listen to the token changes
+storage.stream.listen(print);
+
+// listen to auth state changes
+storage.authenticationStatus.listen(print);
+```
