@@ -106,7 +106,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     ErrorInterceptorHandler handler,
   ) async {
     return refreshToken(token, _tokenDio).then((newToken) async {
-      await tokenStorage.write(newToken);
+      tokenStorage.write(newToken);
       await _requestRetry(error.requestOptions, dio).then((Response response) {
         handler.resolve(response);
       }).catchError((Object error, StackTrace stackTrace) {

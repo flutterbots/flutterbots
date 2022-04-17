@@ -31,8 +31,8 @@ class AuthStatus {
   factory AuthStatus.authenticated() =>
       const AuthStatus(status: Status.authenticated);
 
-  /// Factory for return [AuthStatus] in unauthenticated status and provide a message
-  /// for unauthenticated status reason
+  /// Factory for return [AuthStatus] in unauthenticated status
+  /// and provide a message for unauthenticated status reason
   factory AuthStatus.unauthenticated({String? message}) =>
       AuthStatus(status: Status.unauthenticated, message: message);
 
@@ -78,9 +78,7 @@ mixin RefreshBotMixin<T extends AuthToken> on BotStorageMixin<T> {
   }
 
   void _updateStatus(T? token) {
-    _authState = token != null
-        ? AuthStatus.authenticated()
-        : AuthStatus.unauthenticated();
+    _authState = _getStatus(token);
     _controller.add(_authState);
   }
 
