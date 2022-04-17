@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bot_storage/bot_storage.dart';
 
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 import 'package:refresh_bot/src/token_storage.dart';
 
 /// User authentication status
