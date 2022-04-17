@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="chore: add repo home page">
+      <change beforePath="$PROJECT_DIR$/packages/refresh_bot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/refresh_bot/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="ProjectId" id="25vtdFPDnZ7t6U7rWqBY5jgJUlY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/packages/bot_storage/lib/src" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/bot_storage/example" />
+      <recent name="$PROJECT_DIR$/packages/bot_storage" />
+      <recent name="$PROJECT_DIR$/packages/refresh_bot/lib/src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Dart Command Line App.example.dart">
+    <configuration name="example.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/bot_storage/example/example.dart" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/packages/bot_storage/example" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/bot_storage/example/lib/main.dart" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/packages/bot_storage/example" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Dart Command Line App.example.dart" />
+        <item itemvalue="Dart Command Line App.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="" />
+      <created>1646419473367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1646419473367</updated>
+    </task>
+    <task id="LOCAL-00001" summary=":tada:">
+      <created>1646419810746</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1646419810746</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(refresh_bot): add token extra field">
+      <created>1646425865709</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1646425865709</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refactor(refresh_bot): remove unnecessary line">
+      <created>1646426172281</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1646426172281</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactor(refresh_bot):  refactor storage logic">
+      <created>1647120004010</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647120004010</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactor: separate storage mixin to another package">
+      <created>1648989596126</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1648989596126</updated>
+    </task>
+    <task id="LOCAL-00006" summary=":bookmark:(bot_storage) 1.0.0">
+      <created>1649877791751</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649877791751</updated>
+    </task>
+    <task id="LOCAL-00007" summary=":bookmark:(bot_storage) init">
+      <created>1649937658170</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1649937658170</updated>
+    </task>
+    <task id="LOCAL-00008" summary=":tada: init 1.0.0">
+      <created>1650167444736</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1650167444736</updated>
+    </task>
+    <task id="LOCAL-00009" summary="chore: add melos">
+      <created>1650168174352</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1650168174352</updated>
+    </task>
+    <task id="LOCAL-00010" summary="chore: add melos">
+      <created>1650168184693</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650168184693</updated>
+    </task>
+    <task id="LOCAL-00011" summary="chore: add repo home page">
+      <created>1650168303716</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1650168303716</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=":tada:" />
+    <MESSAGE value="feat(refresh_bot): add token extra field" />
+    <MESSAGE value="refactor(refresh_bot): remove unnecessary line" />
+    <MESSAGE value="refactor(refresh_bot):  refactor storage logic" />
+    <MESSAGE value="refactor: separate storage mixin to another package" />
+    <MESSAGE value=":bookmark: 1.0.0" />
+    <MESSAGE value=":bookmark:(bot_storage) 1.0.0" />
+    <MESSAGE value=":bookmark:(bot_storage) init" />
+    <MESSAGE value=":tada: init 1.0.0" />
+    <MESSAGE value="chore: add melos" />
+    <MESSAGE value="chore: add repo home page" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: add repo home page" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/packages/bot_storage/example/lib/main.dart</url>
+          <line>2</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/packages/bot_storage/example/example.dart</url>
+          <line>5</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
