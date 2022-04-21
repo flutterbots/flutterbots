@@ -48,7 +48,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   final RevokeCallback? onRevoked;
 
   /// Interface API class to read, write and delete token from storage or memory
-  final BotTokenStorage<T> tokenStorage;
+  final BotTokenStorageType<T> tokenStorage;
 
   /// Function for building custom token header depending on storing token
   final TokenHeaderBuilder? tokenHeaderBuilder;

@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:bot_storage/bot_storage.dart';
 import 'package:dio_refresh_bot/dio_refresh_bot.dart';
+import 'package:meta/meta.dart';
+
+///
+typedef DeleteTokenCallback<T> = FutureOr<String?> Function();
 
 ///
 mixin BotTokenStorageType<T> on BotStorage<T> {
@@ -21,17 +25,38 @@ abstract class BotTokenStorage<T extends AuthToken> extends BotStorage<T>
 ///
 class BotMemoryTokenStorage<T extends AuthToken> extends BotMemoryStorage<T>
     with BotTokenStorageType<T>, RefreshBotMixin<T> {
+  ///
+  BotMemoryTokenStorage({
+    WriteCallback<T>? onUpdated,
+    DeleteTokenCallback<T>? onDeleted,
+    ReadCallback<T>? initValue,
+  })  : _writeCallback = onUpdated,
+        _deleteCallback = onDeleted,
+        _initValue = initValue;
+
+  final WriteCallback<T>? _writeCallback;
+  final DeleteTokenCallback<T>? _deleteCallback;
+  final ReadCallback<T>? _initValue;
+
+  @mustCallSuper
   @override
-  FutureOr<void> delete([String? message]) {
-    super.delete(message);
+  FutureOr<void> delete([String? message]) async {
+    await _deleteCallback?.call();
     value = null;
+    final deleteMessage = (await _deleteCallback?.call()) ?? message;
+    await super.delete(deleteMessage);
   }
 
   @override
-  Future<void> write(T? token) async {
-    await super.write(token);
+  @mustCallSuper
+  FutureOr<void> write(T? token) async {
+    await _writeCallback?.call(token);
     value = token;
+    await super.write(token);
   }
+
+  @override
+  T? get initValue => _initValue?.call();
 }
 
 ///
