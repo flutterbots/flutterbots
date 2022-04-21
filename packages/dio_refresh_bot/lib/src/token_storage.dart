@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:bot_storage/bot_storage.dart';
 import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 
-/// An interface which must be implemented to
-/// read, write, and delete the `Token`.
-abstract class BotTokenStorage<T extends AuthToken> extends BotStorage<T> {
+///
+mixin BotTokenStorageType<T> on BotStorage<T> {
   /// Deletes the stored token asynchronously.
   ///
   /// the [message] is for providing the delete reason
@@ -14,13 +13,17 @@ abstract class BotTokenStorage<T extends AuthToken> extends BotStorage<T> {
   FutureOr<void> delete([String? message]);
 }
 
+/// An interface which must be implemented to
+/// read, write, and delete the `Token`.
+abstract class BotTokenStorage<T extends AuthToken> extends BotStorage<T>
+    with BotTokenStorageType<T> {}
+
 ///
 class BotMemoryTokenStorage<T extends AuthToken> extends BotMemoryStorage<T>
-    with RefreshBotMixin<T>
-    implements BotTokenStorage<T> {
+    with BotTokenStorageType<T>, RefreshBotMixin<T> {
   @override
   FutureOr<void> delete([String? message]) {
-    super.delete();
+    super.delete(message);
     value = null;
   }
 
@@ -76,5 +79,20 @@ class AuthToken {
       refreshToken: refreshToken ?? this.refreshToken,
       expiresIn: expiresIn ?? this.expiresIn,
     );
+  }
+
+  ///
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'accessToken': accessToken,
+      'tokenType': tokenType,
+      'refreshToken': refreshToken,
+      'expiresIn': expiresIn,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'AuthToken${toMap()}';
   }
 }

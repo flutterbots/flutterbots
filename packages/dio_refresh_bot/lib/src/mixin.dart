@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bot_storage/bot_storage.dart';
 
 import 'package:meta/meta.dart';
+import 'package:rxdart/subjects.dart';
 
 import 'token_storage.dart';
 
@@ -45,21 +46,25 @@ class AuthStatus {
   /// it is helpful in [AuthStatus.unauthenticated] to describe
   /// why user is logged out (revoked or simple logout....)
   final String? message;
+
+  @override
+  String toString() {
+    return 'AuthStatus${{
+      'status': status,
+      'message': message,
+    }}';
+  }
 }
 
 /// Mixin add reactive behavior to [BotStorageMixin]
-mixin RefreshBotMixin<T extends AuthToken> on BotStorageMixin<T> {
+mixin RefreshBotMixin<T extends AuthToken> on BotStorage<T> {
   AuthStatus _authState = AuthStatus.initial();
 
-  late final StreamController<AuthStatus> _controller =
-      StreamController<AuthStatus>.broadcast()..add(_authState);
+  late final BehaviorSubject<AuthStatus> _controller =
+      BehaviorSubject<AuthStatus>.seeded(_getStatus(read()));
 
   ///
-  Stream<AuthStatus> get authenticationStatus async* {
-    _authState = _getStatus(read());
-    yield _authState;
-    yield* _controller.stream;
-  }
+  Stream<AuthStatus> get authenticationStatus => _controller.stream;
 
   void _setToken(T? token) {
     _updateStatus(token);
@@ -72,10 +77,9 @@ mixin RefreshBotMixin<T extends AuthToken> on BotStorageMixin<T> {
     }
   }
 
-  @override
+  ///
   void close() {
     _controller.close();
-    super.close();
   }
 
   void _updateStatus(T? token) {
@@ -92,7 +96,7 @@ mixin RefreshBotMixin<T extends AuthToken> on BotStorageMixin<T> {
   @mustCallSuper
   @override
   FutureOr<void> write(T? token) async {
-    super.write(value);
+    super.write(token);
     _setToken(token);
   }
 
