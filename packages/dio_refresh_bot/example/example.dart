@@ -28,5 +28,12 @@ void main() {
 
 class TokenStorageImpl extends BotMemoryTokenStorage<AuthToken> {
   @override
-  AuthToken? get initValue => null;
+  AuthToken? get initValue => const AuthToken(
+        accessToken: '<Your Initial Access Token>',
+        refreshToken: '<Your Initial Refresh Token>',
+        tokenType: '<Your Initial Token Type>',
+        // You Can make the token expire in your code
+        // without expiring it from the API call (Optional)
+        expiresIn: Duration(days: 1),
+      );
 }

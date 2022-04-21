@@ -1,0 +1,21 @@
+name: retry_bot
+description: Dio interceptor Retry which makes retrying API Call When getting a timeout.
+version: 1.0.1
+homepage: https://github.com/flutterbots/flutterbots
+
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^4.0.6
+  connectivity_plus: ^2.2.1
+
+dev_dependencies:
+  very_good_analysis: ^2.4.0
+
+
+

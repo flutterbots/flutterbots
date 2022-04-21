@@ -4,7 +4,6 @@ import 'package:bot_storage/bot_storage.dart';
 
 // ignore_for_file: avoid_print
 void main() async {
-
   final botStorage = BotStorageImpl();
   botStorage.stream.listen(print);
   await botStorage.write('new value');
