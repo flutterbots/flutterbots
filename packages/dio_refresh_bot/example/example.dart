@@ -4,7 +4,19 @@ import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 // ignore_for_file: avoid_print
 void main() {
   final dio = Dio();
-  final storage = TokenStorageImpl();
+
+  final storage = BotMemoryTokenStorage<AuthToken>(
+    initValue: () {
+      // Todo: read from storage
+    },
+    onDeleted: () {
+      // Todo: delete from storage
+      return null;
+    },
+    // Todo: update storage with new token
+    onUpdated: (token) {},
+  );
+
   dio.interceptors.add(
     RefreshTokenInterceptor<AuthToken>(
       dio: dio,
@@ -24,16 +36,4 @@ void main() {
 
   // listen to auth state changes
   storage.authenticationStatus.listen(print);
-}
-
-class TokenStorageImpl extends BotMemoryTokenStorage<AuthToken> {
-  @override
-  AuthToken? get initValue => const AuthToken(
-        accessToken: '<Your Initial Access Token>',
-        refreshToken: '<Your Initial Refresh Token>',
-        tokenType: '<Your Initial Token Type>',
-        // You Can make the token expire in your code
-        // without expiring it from the API call (Optional)
-        expiresIn: Duration(days: 1),
-      );
 }
