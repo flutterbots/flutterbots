@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/packages/bot_storage/melos_bot_storage.iml" filepath="$PROJECT_DIR$/packages/bot_storage/melos_bot_storage.iml" />
       <module fileurl="file://$PROJECT_DIR$/packages/dio_refresh_bot/melos_dio_refresh_bot.iml" filepath="$PROJECT_DIR$/packages/dio_refresh_bot/melos_dio_refresh_bot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/retry_bot/melos_retry_bot.iml" filepath="$PROJECT_DIR$/packages/retry_bot/melos_retry_bot.iml" />
       <module fileurl="file://$PROJECT_DIR$/melos_flutter_bots.iml" filepath="$PROJECT_DIR$/melos_flutter_bots.iml" />
     </modules>
   </component>

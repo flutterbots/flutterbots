@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment=":recycle: melos bootstrap">
+    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="build(dio_refresh_bot): update example">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/bot_storage/lib/src/storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/bot_storage/lib/src/storage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/bot_storage/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/bot_storage/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +31,18 @@
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/packages/bot_storage/LICENSE" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/dio_refresh_bot.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/melos_refresh_bot.iml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/example/example.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/bot_storage-1.0.1/lib/src/storage.dart" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/.idea/workspace.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="25vtdFPDnZ7t6U7rWqBY5jgJUlY" />
   <component name="ProjectViewState">
@@ -54,7 +73,12 @@
       <recent name="$PROJECT_DIR$/packages/refresh_bot/lib/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Shell Script.Melos -&gt; Clean Workspace">
+  <component name="RunManager" selected="Dart Command Line App.example.dart (1)">
+    <configuration name="example.dart (1)" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/example/example.dart" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/packages/dio_refresh_bot" />
+      <method v="2" />
+    </configuration>
     <configuration name="example.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/packages/bot_storage/example/example.dart" />
       <option name="workingDirectory" value="$PROJECT_DIR$/packages/bot_storage/example" />
@@ -67,6 +91,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Dart Command Line App.example.dart (1)" />
         <item itemvalue="Dart Command Line App.example.dart" />
         <item itemvalue="Dart Command Line App.main.dart" />
       </list>
@@ -193,7 +218,42 @@
       <option name="project" value="LOCAL" />
       <updated>1650170249231</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="style(dio_refresh_bot): rename lib file">
+      <created>1650171280368</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1650171280368</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat:  add toString">
+      <created>1650541516903</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1650541516903</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat:  add toString">
+      <created>1650541959057</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1650541959057</updated>
+    </task>
+    <task id="LOCAL-00020" summary="build(retry_bot): downgrade dart to 2.16.1">
+      <created>1650543419281</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1650543419281</updated>
+    </task>
+    <task id="LOCAL-00021" summary="build(dio_refresh_bot): update example">
+      <created>1650543970101</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1650543970101</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -235,7 +295,11 @@
     <MESSAGE value="chore:  add license" />
     <MESSAGE value=":truck: rename refresh_bot package" />
     <MESSAGE value=":recycle: melos bootstrap" />
-    <option name="LAST_COMMIT_MESSAGE" value=":recycle: melos bootstrap" />
+    <MESSAGE value="style(dio_refresh_bot): rename lib file" />
+    <MESSAGE value="feat:  add toString" />
+    <MESSAGE value="build(retry_bot): downgrade dart to 2.16.1" />
+    <MESSAGE value="build(dio_refresh_bot): update example" />
+    <option name="LAST_COMMIT_MESSAGE" value="build(dio_refresh_bot): update example" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
