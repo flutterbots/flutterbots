@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="build(dio_refresh_bot): update example">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/bot_storage/lib/src/storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/bot_storage/lib/src/storage.dart" afterDir="false" />
+    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="fix: read should return null">
       <change beforePath="$PROJECT_DIR$/packages/bot_storage/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/bot_storage/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +246,42 @@
       <option name="project" value="LOCAL" />
       <updated>1650543970101</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fix(dio_refresh_bot): token stream  event has not been added">
+      <created>1650545180259</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545180259</updated>
+    </task>
+    <task id="LOCAL-00023" summary="build(bot_storage): remove flutter test dependencies">
+      <created>1650545256364</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545256364</updated>
+    </task>
+    <task id="LOCAL-00024" summary="build(dio_refresh_bot): add rx_dart">
+      <created>1650545302594</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545302594</updated>
+    </task>
+    <task id="LOCAL-00025" summary="chore: melos bootstrap">
+      <created>1650545337645</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545337645</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix: read should return null">
+      <created>1650545376900</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545376900</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -299,7 +327,12 @@
     <MESSAGE value="feat:  add toString" />
     <MESSAGE value="build(retry_bot): downgrade dart to 2.16.1" />
     <MESSAGE value="build(dio_refresh_bot): update example" />
-    <option name="LAST_COMMIT_MESSAGE" value="build(dio_refresh_bot): update example" />
+    <MESSAGE value="fix(dio_refresh_bot): token stream  event has not been added" />
+    <MESSAGE value="build(bot_storage): remove flutter test dependencies" />
+    <MESSAGE value="build(dio_refresh_bot): add rx_dart" />
+    <MESSAGE value="chore: melos bootstrap" />
+    <MESSAGE value="fix: read should return null" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: read should return null" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
