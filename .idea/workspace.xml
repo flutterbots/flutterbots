@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="fix: read should return null">
-      <change beforePath="$PROJECT_DIR$/packages/bot_storage/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/bot_storage/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="chore: melos bootstrap" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -281,7 +279,28 @@
       <option name="project" value="LOCAL" />
       <updated>1650545376900</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="build: v1.0.2">
+      <created>1650545412166</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545412166</updated>
+    </task>
+    <task id="LOCAL-00028" summary="build(refresh_bot): v1.0.2">
+      <created>1650545479558</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545479558</updated>
+    </task>
+    <task id="LOCAL-00029" summary="chore: melos bootstrap">
+      <created>1650545567692</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545567692</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -307,8 +326,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value=":tada:" />
-    <MESSAGE value="feat(refresh_bot): add token extra field" />
     <MESSAGE value="refactor(refresh_bot): remove unnecessary line" />
     <MESSAGE value="refactor(refresh_bot):  refactor storage logic" />
     <MESSAGE value="refactor: separate storage mixin to another package" />
@@ -330,9 +347,11 @@
     <MESSAGE value="fix(dio_refresh_bot): token stream  event has not been added" />
     <MESSAGE value="build(bot_storage): remove flutter test dependencies" />
     <MESSAGE value="build(dio_refresh_bot): add rx_dart" />
-    <MESSAGE value="chore: melos bootstrap" />
     <MESSAGE value="fix: read should return null" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: read should return null" />
+    <MESSAGE value="build(bot_storage): v1.0.2" />
+    <MESSAGE value="build(refresh_bot): v1.0.2" />
+    <MESSAGE value="chore: melos bootstrap" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: melos bootstrap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
