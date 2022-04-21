@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 /// Callback for read value
-typedef ReadCallback<T> = T Function();
+typedef ReadCallback<T> = T? Function();
 
 /// Callback for Write a new value
 typedef WriteCallback<T> = FutureOr<void> Function(T? value);
