@@ -26,14 +26,15 @@ typedef TokenHeaderBuilder<T> = Map<String, String> Function(T token);
 class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   ///
   RefreshTokenInterceptor({
-    required this.dio,
+    Dio? dio,
     required this.tokenStorage,
     required this.refreshToken,
     this.onRevoked,
     this.tokenProtocol = const TokenProtocol(),
     Dio? tokenDio,
     this.tokenHeaderBuilder,
-  }) : _tokenDio = tokenDio ?? Dio(dio.options);
+  })  : _dio = dio ?? Dio(),
+        _tokenDio = tokenDio ?? Dio(dio?.options);
 
   /// This function called when we should refresh the token
   /// and Its returns a new token
@@ -50,19 +51,15 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   /// Interface API class to read, write and delete token from storage or memory
   final BotTokenStorageType<T> tokenStorage;
 
-  /// Function for building custom token header depending on storing token
+  /// Function for building custom token header depending on stored token
   final TokenHeaderBuilder? tokenHeaderBuilder;
-
-  /// The dio client we use for HTTP calls and we added this interceptor to it
-  ///
-  /// used for retry and copy its options to [_tokenDio] if token dio
-  /// not provided
-  final Dio dio;
 
   /// The [TokenProtocol] for refresh token process
   final TokenProtocol tokenProtocol;
 
   final Dio _tokenDio;
+
+  final Dio _dio;
 
   @override
   Future<void> onRequest(
@@ -92,7 +89,10 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     // then => refreshToken has done by another intercept process
     if (storageToken != err.requestOptions.token) {
       // retry with new storageToken
-      await _requestRetry(err.requestOptions, dio).then((response) {
+      await _requestRetry(
+        err.requestOptions,
+        storageToken,
+      ).then((response) {
         handler.resolve(response);
       }).catchError((Object error, StackTrace stackTrace) {
         handler.next(error as DioError);
@@ -109,7 +109,10 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   ) async {
     return refreshToken(token, _tokenDio).then((newToken) async {
       tokenStorage.write(newToken);
-      await _requestRetry(error.requestOptions, dio).then((Response response) {
+      await _requestRetry(
+        error.requestOptions,
+        newToken,
+      ).then((Response response) {
         handler.resolve(response);
       }).catchError((Object error, StackTrace stackTrace) {
         handler.next(error as DioError);
@@ -126,8 +129,16 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     );
   }
 
-  Future<Response> _requestRetry(RequestOptions requestOptions, Dio dio) {
-    return dio.fetch<dynamic>(requestOptions);
+  Future<Response> _requestRetry(
+    RequestOptions requestOptions,
+    T token,
+  ) {
+    return _dio.fetch<dynamic>(
+      requestOptions
+        ..headers.addAll(
+          _headersBuilder(token),
+        ),
+    );
   }
 
   Map<String, String> _headersBuilder(T token) {
