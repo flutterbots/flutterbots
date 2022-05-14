@@ -4,25 +4,39 @@ import 'package:bot_storage/bot_storage.dart';
 import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 import 'package:meta/meta.dart';
 
-///
+/// Callback for delete stored value from storage and return optional message
 typedef DeleteTokenCallback<T> = FutureOr<String?> Function();
 
+/// A type mixin used in [RefreshTokenInterceptor] that extend
+/// [BotStorage.delete] behavior with message parameter.
 ///
-mixin BotTokenStorageType<T> on BotStorage<T> {
+/// That can be used for delete token and provide a reason message,
+/// refer to [RefreshTokenInterceptor.onRevoked]
+///
+mixin BotTokenStorageType<T> on BotStorageMixin<T> {
   /// Deletes the stored token asynchronously.
   ///
   /// the [message] is for providing the delete reason
   /// for example "user logged out" or "user blocked"
   @override
-  FutureOr<void> delete([String? message]);
+  @mustCallSuper
+  FutureOr<void> delete([String? message]) {
+    super.delete();
+  }
+
+  @override
+  @mustCallSuper
+  void write(T? value) {
+    super.write(value);
+  }
 }
 
-/// An interface which must be implemented to
-/// read, write, and delete the `Token`.
+/// A token storage that extends [BotStorage] to store and retrieve tokens.
 abstract class BotTokenStorage<T extends AuthToken> extends BotStorage<T>
-    with BotTokenStorageType<T> {}
+    with BotStorageMixin<T>, BotTokenStorageType<T> {}
 
-///
+/// Memory storage to store and retrieve tokens in memory.
+/// read, write, and delete the `value` from memory
 class BotMemoryTokenStorage<T extends AuthToken> extends BotMemoryStorage<T>
     with BotTokenStorageType<T>, RefreshBotMixin<T> {
   ///
@@ -82,7 +96,7 @@ class AuthToken {
   /// The access token as a string.
   final String accessToken;
 
-  /// The type of token, the default is “bearer”.
+  /// The type of token, the default is “bearer”
   final String tokenType;
 
   /// Token which can be used to obtain another access token.
