@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bot_storage/bot_storage.dart';
 import 'package:dio_refresh_bot/dio_refresh_bot.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 /// Callback for delete stored value from storage and return optional message
@@ -74,7 +75,7 @@ class BotMemoryTokenStorage<T extends AuthToken> extends BotMemoryStorage<T>
 }
 
 ///
-class AuthToken {
+class AuthToken extends Equatable {
   ///
   const AuthToken({
     required this.accessToken,
@@ -88,8 +89,8 @@ class AuthToken {
     return AuthToken(
       accessToken: map['accessToken'] as String,
       tokenType: map['tokenType'] as String,
-      refreshToken: map['refreshToken'] as String,
-      expiresIn: map['expiresIn'] as Duration,
+      refreshToken: map['refreshToken'] as String?,
+      expiresIn: map['expiresIn'] as int?,
     );
   }
 
@@ -103,14 +104,14 @@ class AuthToken {
   final String? refreshToken;
 
   ///
-  final Duration? expiresIn;
+  final int? expiresIn;
 
   ///
   AuthToken copyWith({
     String? accessToken,
     String? tokenType,
     String? refreshToken,
-    Duration? expiresIn,
+    int? expiresIn,
   }) {
     return AuthToken(
       accessToken: accessToken ?? this.accessToken,
@@ -134,4 +135,7 @@ class AuthToken {
   String toString() {
     return 'AuthToken${toMap()}';
   }
+
+  @override
+  List<Object?> get props => [accessToken, tokenType, refreshToken, expiresIn];
 }
