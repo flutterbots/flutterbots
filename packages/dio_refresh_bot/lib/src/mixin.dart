@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:bot_storage/bot_storage.dart';
 
+import 'package:bot_storage/bot_storage.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -57,7 +57,7 @@ class AuthStatus {
 }
 
 /// Mixin add reactive behavior to [BotStorageMixin]
-mixin RefreshBotMixin<T extends AuthToken> on BotStorage<T> {
+mixin RefreshBotMixin<T extends AuthToken> on BotTokenStorageType<T> {
   AuthStatus _authState = AuthStatus.initial();
 
   late final BehaviorSubject<AuthStatus> _controller =
@@ -77,8 +77,9 @@ mixin RefreshBotMixin<T extends AuthToken> on BotStorage<T> {
     }
   }
 
-  ///
+  @override
   void close() {
+    super.close();
     _controller.close();
   }
 
