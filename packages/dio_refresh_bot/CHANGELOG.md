@@ -1,4 +1,9 @@
 
+
+## 1.0.4
+
+* build: upgrade bot_storage to 1.0.4 
+
 ## 1.0.3+1
 
 * build: downgrade meta to 1.7.0
