@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="chore: melos bootstrap" />
+    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="fix(refresh_bot): release 1.0.4">
+      <change afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" afterDir="false" />
+    </list>
+    <list id="1008681c-625d-431b-b175-2e6459684ec0" name="fix: mix BotTokenStorageType on BotStorageMixin" comment="chore(refresh_bot): release 1.0.3">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/melos_flutter_bots.iml" beforeDir="false" afterPath="$PROJECT_DIR$/melos_flutter_bots.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/retry_bot/melos_retry_bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/retry_bot/melos_retry_bot.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,22 +31,70 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="sana" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1654284313" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="sana" />
+                    <option name="lastUsedInstant" value="1654268665" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/packages/bot_storage/LICENSE" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/dio_refresh_bot.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/melos_refresh_bot.iml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/example/example.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/bot_storage-1.0.1/lib/src/storage.dart" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/.idea/workspace.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/interceptor.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.idea/workspace.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/dio_refresh_bot.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/bot_storage/LICENSE" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/melos_refresh_bot.iml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/dio_refresh_bot/example/example.dart" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="25vtdFPDnZ7t6U7rWqBY5jgJUlY" />
   <component name="ProjectViewState">
@@ -44,14 +105,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/packages/bot_storage/lib/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../passengers" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -59,32 +121,50 @@
       <recent name="$PROJECT_DIR$/packages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/dio_refresh_bot/test" />
       <recent name="$PROJECT_DIR$/packages/bot_storage/example" />
       <recent name="$PROJECT_DIR$/packages/bot_storage" />
       <recent name="$PROJECT_DIR$/packages/refresh_bot/lib/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Dart Command Line App.example.dart (1)">
-    <configuration name="example.dart (1)" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/example/example.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$/packages/dio_refresh_bot" />
+  <component name="RunManager" selected="Dart Test.write should change memory token and emit it and change authenticationStatus in token_storage_test.dart">
+    <configuration name="Bot Memory Token Storage in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
+      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
+      <option name="testName" value="Bot Memory Token Storage" />
       <method v="2" />
     </configuration>
-    <configuration name="example.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/packages/bot_storage/example/example.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$/packages/bot_storage/example" />
+    <configuration name="write should change memory token and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
+      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
+      <option name="testName" value="write should change memory token and emit it '&#10;        'and change authenticationStatus" />
       <method v="2" />
     </configuration>
-    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/packages/bot_storage/example/lib/main.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$/packages/bot_storage/example" />
+    <configuration name="write should change memory token and emit it and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
+      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
+      <option name="testName" value="write should change memory token and emit it and change authenticationStatus" />
+      <method v="2" />
+    </configuration>
+    <configuration name="write should change mixin token value and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
+      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
+      <option name="testName" value="write should change mixin token value and emit it '&#10;        'and change authenticationStatus" />
+      <method v="2" />
+    </configuration>
+    <configuration name="write should change mixin token value and emit it and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
+      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
+      <option name="testName" value="write should change mixin token value and emit it and change authenticationStatus" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Dart Command Line App.example.dart (1)" />
-        <item itemvalue="Dart Command Line App.example.dart" />
-        <item itemvalue="Dart Command Line App.main.dart" />
+        <item itemvalue="Dart Test.write should change memory token and emit it and change authenticationStatus in token_storage_test.dart" />
+        <item itemvalue="Dart Test.write should change memory token and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" />
+        <item itemvalue="Dart Test.write should change mixin token value and emit it and change authenticationStatus in token_storage_test.dart" />
+        <item itemvalue="Dart Test.write should change mixin token value and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" />
+        <item itemvalue="Dart Test.Bot Memory Token Storage in token_storage_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -92,45 +172,11 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="" />
+      <changelist id="1008681c-625d-431b-b175-2e6459684ec0" name="fix: mix BotTokenStorageType on BotStorageMixin" comment="" />
       <created>1646419473367</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646419473367</updated>
-    </task>
-    <task id="LOCAL-00001" summary=":tada:">
-      <created>1646419810746</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1646419810746</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feat(refresh_bot): add token extra field">
-      <created>1646425865709</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1646425865709</updated>
-    </task>
-    <task id="LOCAL-00003" summary="refactor(refresh_bot): remove unnecessary line">
-      <created>1646426172281</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1646426172281</updated>
-    </task>
-    <task id="LOCAL-00004" summary="refactor(refresh_bot):  refactor storage logic">
-      <created>1647120004010</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1647120004010</updated>
-    </task>
-    <task id="LOCAL-00005" summary="refactor: separate storage mixin to another package">
-      <created>1648989596126</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1648989596126</updated>
     </task>
     <task id="LOCAL-00006" summary=":bookmark:(bot_storage) 1.0.0">
       <created>1649877791751</created>
@@ -300,7 +346,182 @@
       <option name="project" value="LOCAL" />
       <updated>1650545567692</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="chore: melos bootstrap">
+      <created>1650545712578</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545712578</updated>
+    </task>
+    <task id="LOCAL-00031" summary="chore: melos bootstrap">
+      <created>1650545758165</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545758165</updated>
+    </task>
+    <task id="LOCAL-00032" summary="chore: melos bootstrap">
+      <created>1650545821799</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1650545821799</updated>
+    </task>
+    <task id="LOCAL-00033" summary="fix: make dio optional">
+      <created>1651567132760</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1651567132760</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fix: mix BotTokenStorageType on BotStorageMixin">
+      <created>1652557319317</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1652557319318</updated>
+    </task>
+    <task id="LOCAL-00035" summary="fix: mix BotTokenStorageType on BotStorageMixin">
+      <created>1652557417378</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1652557417378</updated>
+    </task>
+    <task id="LOCAL-00036" summary="build(refresh_bot): add equatable">
+      <created>1654265153017</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1654265153017</updated>
+    </task>
+    <task id="LOCAL-00037" summary="build(refresh_bot): add equatable">
+      <created>1654265188081</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1654265188081</updated>
+    </task>
+    <task id="LOCAL-00038" summary="build(refresh_bot): downgrade dart to 2.12">
+      <created>1654265332808</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1654265332808</updated>
+    </task>
+    <task id="LOCAL-00039" summary="chore: add gitignore">
+      <created>1654266246943</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1654266246943</updated>
+    </task>
+    <task id="LOCAL-00040" summary="build(bot_storage): upgrade dependencies">
+      <created>1654266285328</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1654266285328</updated>
+    </task>
+    <task id="LOCAL-00041" summary="chore(bot_storage): release 1.0.3">
+      <created>1654266905147</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1654266905147</updated>
+    </task>
+    <task id="LOCAL-00042" summary="feat(refresh_bot): make AuthToken  extends Equatable">
+      <created>1654267246837</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1654267246837</updated>
+    </task>
+    <task id="LOCAL-00043" summary="build(refresh_bot): upgrade dependencies">
+      <created>1654267334690</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1654267334690</updated>
+    </task>
+    <task id="LOCAL-00044" summary="fix(refresh_bot): implement should shouldRefresh to onRequest">
+      <created>1654267385817</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1654267385817</updated>
+    </task>
+    <task id="LOCAL-00045" summary="chore(refresh_bot): release 1.0.3">
+      <created>1654268253769</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1654268253769</updated>
+    </task>
+    <task id="LOCAL-00046" summary="chore(refresh_bot): release 1.0.3">
+      <created>1654268311520</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1654268311520</updated>
+    </task>
+    <task id="LOCAL-00047" summary="chore(refresh_bot): release 1.0.3">
+      <created>1654268839573</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1654268839573</updated>
+    </task>
+    <task id="LOCAL-00048" summary="null">
+      <created>1654272185978</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1654272185978</updated>
+    </task>
+    <task id="LOCAL-00049" summary="fix(bot_storage): downgrade meta to 1.7.0">
+      <created>1654284697954</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1654284697954</updated>
+    </task>
+    <task id="LOCAL-00050" summary="fix(bot_storage): downgrade meta to 1.7.0 &amp; release 1.0.3+1">
+      <created>1654284872898</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1654284872899</updated>
+    </task>
+    <task id="LOCAL-00051" summary="fix(refresh_bot): downgrade meta to 1.7.0 &amp; release 1.0.3+1">
+      <created>1654284886760</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1654284886760</updated>
+    </task>
+    <task id="LOCAL-00052" summary="fix(bot_storage): release 1.0.4">
+      <created>1654286673847</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1654286673847</updated>
+    </task>
+    <task id="LOCAL-00053" summary="fix(refresh_bot): release 1.0.4">
+      <created>1654286877988</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1654286877988</updated>
+    </task>
+    <task id="LOCAL-00054" summary="fix(refresh_bot): release 1.0.4">
+      <created>1654287042178</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1654287042178</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -316,6 +537,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="19cb3ec5-3408-4b4a-a478-02db45571291">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/home/hussam/StudioProjects/flutterbots/packages/bot_storage" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -323,35 +569,55 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="19cb3ec5-3408-4b4a-a478-02db45571291" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor(refresh_bot): remove unnecessary line" />
-    <MESSAGE value="refactor(refresh_bot):  refactor storage logic" />
-    <MESSAGE value="refactor: separate storage mixin to another package" />
-    <MESSAGE value=":bookmark: 1.0.0" />
-    <MESSAGE value=":bookmark:(bot_storage) 1.0.0" />
-    <MESSAGE value=":bookmark:(bot_storage) init" />
-    <MESSAGE value=":tada: init 1.0.0" />
-    <MESSAGE value="chore: add melos" />
-    <MESSAGE value="chore: add repo home page" />
-    <MESSAGE value="chore(refresh_bot): add description" />
-    <MESSAGE value="chore: add workspace.iml" />
-    <MESSAGE value="chore:  add license" />
-    <MESSAGE value=":truck: rename refresh_bot package" />
-    <MESSAGE value=":recycle: melos bootstrap" />
-    <MESSAGE value="style(dio_refresh_bot): rename lib file" />
-    <MESSAGE value="feat:  add toString" />
-    <MESSAGE value="build(retry_bot): downgrade dart to 2.16.1" />
-    <MESSAGE value="build(dio_refresh_bot): update example" />
     <MESSAGE value="fix(dio_refresh_bot): token stream  event has not been added" />
     <MESSAGE value="build(bot_storage): remove flutter test dependencies" />
     <MESSAGE value="build(dio_refresh_bot): add rx_dart" />
     <MESSAGE value="fix: read should return null" />
     <MESSAGE value="build(bot_storage): v1.0.2" />
     <MESSAGE value="build(refresh_bot): v1.0.2" />
+    <MESSAGE value="chore(retry_bot): add gitignore" />
     <MESSAGE value="chore: melos bootstrap" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: melos bootstrap" />
+    <MESSAGE value="fix: make dio optional" />
+    <MESSAGE value="build(refresh_bot): add equatable" />
+    <MESSAGE value="build(refresh_bot): downgrade dart to 2.12" />
+    <MESSAGE value="chore: add gitignore" />
+    <MESSAGE value="build(bot_storage): upgrade dependencies" />
+    <MESSAGE value="chore(bot_storage): release 1.0.3" />
+    <MESSAGE value="feat(refresh_bot): make AuthToken  extends Equatable" />
+    <MESSAGE value="build(refresh_bot): upgrade dependencies" />
+    <MESSAGE value="fix(refresh_bot): implement should shouldRefresh to onRequest" />
+    <MESSAGE value="fix: mix BotTokenStorageType on BotStorageMixin" />
+    <MESSAGE value="chore(refresh_bot): release 1.0.3" />
+    <MESSAGE value="null" />
+    <MESSAGE value="fix(bot_storage): downgrade meta to 1.7.0" />
+    <MESSAGE value="fix(bot_storage): downgrade meta to 1.7.0" />
+    <MESSAGE value="fix(refresh_bot): downgrade meta to 1.7.0 &amp; release 1.0.3+1" />
+    <MESSAGE value="fix(bot_storage): release 1.0.4" />
+    <MESSAGE value="fix(refresh_bot): release 1.0.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(refresh_bot): release 1.0.4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -360,11 +626,6 @@
           <url>file://$PROJECT_DIR$/packages/bot_storage/example/lib/main.dart</url>
           <line>2</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/packages/bot_storage/example/example.dart</url>
-          <line>5</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

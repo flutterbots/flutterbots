@@ -1,20 +1,19 @@
 import 'dart:async';
 
 import 'package:bot_storage/bot_storage.dart';
+import 'package:dio_refresh_bot/src/token_storage.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/subjects.dart';
-
-import 'token_storage.dart';
 
 /// User authentication status
 enum Status {
   /// The initial status before read the token value
   initial,
 
-  /// User inn the authenticated status
+  /// User is in the authenticated status
   authenticated,
 
-  /// User inn the unauthenticated status
+  /// User is in the unauthenticated status
   unauthenticated,
 }
 

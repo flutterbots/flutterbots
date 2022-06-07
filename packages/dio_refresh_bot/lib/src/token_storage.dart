@@ -27,7 +27,7 @@ mixin BotTokenStorageType<T> on BotStorageMixin<T> {
 
   @override
   @mustCallSuper
-  void write(T? value) {
+  FutureOr<void> write(T? value) {
     super.write(value);
   }
 }
