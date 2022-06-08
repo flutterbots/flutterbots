@@ -2,17 +2,22 @@ name: Refresh Bot Test Work
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "main" ]
     paths:
-      - "**.dart"
+      - ".github/workflows/fresh_dio.yaml"
+      - "packages/dio_refresh_bot/lib/**"
+      - "packages/dio_refresh_bot/test/**"
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "main" ]
     paths:
-    - "**.dart"
+      - ".github/workflows/fresh_dio.yaml"
+      - "packages/dio_refresh_bot/lib/**"
+      - "packages/dio_refresh_bot/test/**"
 
 jobs:
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
     with:
-      dart_sdk: "stable"
       working_directory: "packages/dio_refresh_bot"
+      dart_sdk: "stable"
+
