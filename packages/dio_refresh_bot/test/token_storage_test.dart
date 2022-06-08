@@ -8,46 +8,68 @@ class MockAuthToken extends Mock implements AuthToken {}
 
 class MockBotTokenStorage extends BotTokenStorage<MockAuthToken>
     with RefreshBotMixin {
+  MockAuthToken? storageValue;
+
   @override
   MockAuthToken? read() {
-    return null;
+    return storageValue;
   }
 
   @override
   FutureOr<void> write(MockAuthToken? value) {
+    storageValue = value;
     super.write(value);
   }
 
   @override
   FutureOr<void> delete([String? message]) {
+    storageValue = null;
     super.delete(message);
   }
 }
 
 void main() {
   group('AuthToken', () {
-    test('tokenType defaults is bearer', () {
-      expect(const AuthToken(accessToken: 'accessToken').tokenType, 'bearer');
+    late AuthToken authToken;
+    late AuthToken authToken2;
+    late Map<String, dynamic> mapMatcher;
+    setUp(() {
+      authToken = const AuthToken(
+        accessToken: 'accessToken',
+        expiresIn: 98,
+        refreshToken: 'refreshToken',
+        tokenType: 'tokenType',
+      );
+      authToken2 = const AuthToken(
+        accessToken: 'accessToken',
+        expiresIn: 98,
+        refreshToken: 'refreshToken',
+        tokenType: 'tokenType',
+      );
+      mapMatcher = <String, dynamic>{
+        'accessToken': 'accessToken',
+        'tokenType': 'tokenType',
+        'refreshToken': 'refreshToken',
+        'expiresIn': 98,
+      };
+    });
+
+    test('to map', () {
+      expect(authToken.toMap(), mapMatcher);
+    });
+
+    test('from map', () {
+      expect(AuthToken.fromMap(mapMatcher), authToken);
+    });
+
+    test('to string', () {
+      expect(
+        authToken.toString(),
+        'AuthToken$mapMatcher',
+      );
     });
 
     group('token equality', () {
-      late AuthToken authToken;
-      late AuthToken authToken2;
-      setUp(() {
-        authToken = const AuthToken(
-          accessToken: 'accessToken',
-          expiresIn: 98,
-          refreshToken: 'refreshToken',
-          tokenType: 'tokenType',
-        );
-        authToken2 = const AuthToken(
-          accessToken: 'accessToken',
-          expiresIn: 98,
-          refreshToken: 'refreshToken',
-          tokenType: 'tokenType',
-        );
-      });
-
       test('token equality with same values', () {
         expect(authToken == authToken2, isTrue);
       });
@@ -80,6 +102,13 @@ void main() {
         );
       });
     });
+  });
+
+  test('AuthStatus toString', () {
+    expect(
+      AuthStatus.unauthenticated(message: 'message').toString(),
+      'AuthStatus${{'status': Status.unauthenticated, 'message': 'message'}}',
+    );
   });
 
   group('Bot Memory Token Storage', () {
