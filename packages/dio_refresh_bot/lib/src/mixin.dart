@@ -57,7 +57,8 @@ class AuthStatus {
 
 /// Mixin add reactive behavior to [BotStorageMixin]
 mixin RefreshBotMixin<T extends AuthToken> on BotTokenStorageType<T> {
-  AuthStatus _authState = AuthStatus.initial();
+  ///
+  AuthStatus authStatus = AuthStatus.initial();
 
   late final BehaviorSubject<AuthStatus> _controller =
       BehaviorSubject<AuthStatus>.seeded(_getStatus(read()));
@@ -70,25 +71,24 @@ mixin RefreshBotMixin<T extends AuthToken> on BotTokenStorageType<T> {
   }
 
   void _revokeToken(String? message) {
-    if (_authState.status != Status.unauthenticated) {
-      _authState = AuthStatus.unauthenticated(message: message);
-      _controller.add(_authState);
+    if (authStatus.status != Status.unauthenticated) {
+      authStatus = AuthStatus.unauthenticated(message: message);
+      _controller.add(authStatus);
     }
   }
 
-  @override
+  ///
   void close() {
-    super.close();
     _controller.close();
   }
 
   void _updateStatus(T? token) {
-    _authState = _getStatus(token);
-    _controller.add(_authState);
+    authStatus = _getStatus(token);
+    _controller.add(authStatus);
   }
 
   AuthStatus _getStatus(T? token) {
-    return _authState = token != null
+    return authStatus = token != null
         ? AuthStatus.authenticated()
         : AuthStatus.unauthenticated();
   }

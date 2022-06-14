@@ -14,7 +14,7 @@ typedef DeleteTokenCallback<T> = FutureOr<String?> Function();
 /// That can be used for delete token and provide a reason message,
 /// refer to [RefreshTokenInterceptor.onRevoked]
 ///
-mixin BotTokenStorageType<T> on BotStorageMixin<T> {
+mixin BotTokenStorageType<T> on BotStorage<T> {
   /// Deletes the stored token asynchronously.
   ///
   /// the [message] is for providing the delete reason
@@ -24,17 +24,11 @@ mixin BotTokenStorageType<T> on BotStorageMixin<T> {
   FutureOr<void> delete([String? message]) {
     super.delete();
   }
-
-  @override
-  @mustCallSuper
-  FutureOr<void> write(T? value) {
-    super.write(value);
-  }
 }
 
 /// A token storage that extends [BotStorage] to store and retrieve tokens.
 abstract class BotTokenStorage<T extends AuthToken> extends BotStorage<T>
-    with BotStorageMixin<T>, BotTokenStorageType<T> {}
+    with BotStorageMixin<T>, BotTokenStorageType<T>, RefreshBotMixin<T> {}
 
 /// Memory storage to store and retrieve tokens in memory.
 /// read, write, and delete the `value` from memory

@@ -6,8 +6,7 @@ import 'package:test/test.dart';
 
 class MockAuthToken extends Mock implements AuthToken {}
 
-class MockBotTokenStorage extends BotTokenStorage<MockAuthToken>
-    with RefreshBotMixin {
+class MockBotTokenStorage extends BotTokenStorage<MockAuthToken> {
   MockAuthToken? storageValue;
 
   @override

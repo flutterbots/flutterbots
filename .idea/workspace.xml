@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="fix(refresh_bot): release 1.0.4">
-      <change afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+    <list default="true" id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="test(refresh_bot): edit storage test">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/melos_flutter_bots.iml" beforeDir="false" afterPath="$PROJECT_DIR$/melos_flutter_bots.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/mixin.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/lib/src/token_storage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/pubspec.yaml" afterDir="false" />
-    </list>
-    <list id="1008681c-625d-431b-b175-2e6459684ec0" name="fix: mix BotTokenStorageType on BotStorageMixin" comment="chore(refresh_bot): release 1.0.3">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/melos_flutter_bots.iml" beforeDir="false" afterPath="$PROJECT_DIR$/melos_flutter_bots.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/retry_bot/melos_retry_bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/retry_bot/melos_retry_bot.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +42,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="sana" />
+        <entry key="$PROJECT_DIR$" value="test" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,6 +64,18 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="refactor" />
+                    <option name="lastUsedInstant" value="1655197726" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="test" />
+                    <option name="lastUsedInstant" value="1654608714" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="refactor_storage" />
+                    <option name="lastUsedInstant" value="1654608362" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
                     <option name="lastUsedInstant" value="1654284313" />
@@ -127,44 +135,43 @@
       <recent name="$PROJECT_DIR$/packages/refresh_bot/lib/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Dart Test.write should change memory token and emit it and change authenticationStatus in token_storage_test.dart">
-    <configuration name="Bot Memory Token Storage in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Dart Test.Tests in token_storage_test.dart">
+    <configuration name="AuthStatus toString in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
       <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
-      <option name="testName" value="Bot Memory Token Storage" />
+      <option name="testName" value="AuthStatus toString" />
       <method v="2" />
     </configuration>
-    <configuration name="write should change memory token and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
-      <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
-      <option name="testName" value="write should change memory token and emit it '&#10;        'and change authenticationStatus" />
+      <option name="testName" value="token_storage_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="write should change memory token and emit it and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+    <configuration name="from map in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
       <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
-      <option name="testName" value="write should change memory token and emit it and change authenticationStatus" />
+      <option name="testName" value="from map" />
       <method v="2" />
     </configuration>
-    <configuration name="write should change mixin token value and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+    <configuration name="to string in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
       <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
-      <option name="testName" value="write should change mixin token value and emit it '&#10;        'and change authenticationStatus" />
+      <option name="testName" value="to string" />
       <method v="2" />
     </configuration>
-    <configuration name="write should change mixin token value and emit it and change authenticationStatus in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
+    <configuration name="tokenType defaults is bearer in token_storage_test.dart" type="DartTestRunConfigurationType" factoryName="Dart Test" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/packages/dio_refresh_bot/test/token_storage_test.dart" />
       <option name="scope" value="GROUP_OR_TEST_BY_NAME" />
-      <option name="testName" value="write should change mixin token value and emit it and change authenticationStatus" />
+      <option name="testName" value="tokenType defaults is bearer" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Dart Test.write should change memory token and emit it and change authenticationStatus in token_storage_test.dart" />
-        <item itemvalue="Dart Test.write should change memory token and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" />
-        <item itemvalue="Dart Test.write should change mixin token value and emit it and change authenticationStatus in token_storage_test.dart" />
-        <item itemvalue="Dart Test.write should change mixin token value and emit it '&#10;        'and change authenticationStatus in token_storage_test.dart" />
-        <item itemvalue="Dart Test.Bot Memory Token Storage in token_storage_test.dart" />
+        <item itemvalue="Dart Test.Tests in token_storage_test.dart" />
+        <item itemvalue="Dart Test.AuthStatus toString in token_storage_test.dart" />
+        <item itemvalue="Dart Test.from map in token_storage_test.dart" />
+        <item itemvalue="Dart Test.to string in token_storage_test.dart" />
+        <item itemvalue="Dart Test.tokenType defaults is bearer in token_storage_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -172,25 +179,10 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ddc61026-ecd0-4517-93b5-95eb10e7cb87" name="Default Changelist" comment="" />
-      <changelist id="1008681c-625d-431b-b175-2e6459684ec0" name="fix: mix BotTokenStorageType on BotStorageMixin" comment="" />
       <created>1646419473367</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646419473367</updated>
-    </task>
-    <task id="LOCAL-00006" summary=":bookmark:(bot_storage) 1.0.0">
-      <created>1649877791751</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1649877791751</updated>
-    </task>
-    <task id="LOCAL-00007" summary=":bookmark:(bot_storage) init">
-      <created>1649937658170</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1649937658170</updated>
     </task>
     <task id="LOCAL-00008" summary=":tada: init 1.0.0">
       <created>1650167444736</created>
@@ -521,7 +513,21 @@
       <option name="project" value="LOCAL" />
       <updated>1654287042178</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="test(refresh_bot): add storage test">
+      <created>1654608305928</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1654608305928</updated>
+    </task>
+    <task id="LOCAL-00056" summary="test(refresh_bot): edit storage test">
+      <created>1654702741966</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1654702741966</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -564,7 +570,19 @@
         </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="test" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -592,8 +610,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(dio_refresh_bot): token stream  event has not been added" />
-    <MESSAGE value="build(bot_storage): remove flutter test dependencies" />
     <MESSAGE value="build(dio_refresh_bot): add rx_dart" />
     <MESSAGE value="fix: read should return null" />
     <MESSAGE value="build(bot_storage): v1.0.2" />
@@ -617,7 +633,9 @@
     <MESSAGE value="fix(refresh_bot): downgrade meta to 1.7.0 &amp; release 1.0.3+1" />
     <MESSAGE value="fix(bot_storage): release 1.0.4" />
     <MESSAGE value="fix(refresh_bot): release 1.0.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(refresh_bot): release 1.0.4" />
+    <MESSAGE value="test(refresh_bot): add storage test" />
+    <MESSAGE value="test(refresh_bot): edit storage test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test(refresh_bot): edit storage test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
