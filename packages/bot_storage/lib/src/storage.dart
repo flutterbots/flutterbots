@@ -145,6 +145,11 @@ mixin BotStorageMixin<T> on BotStorage<T> {
     _value = null;
   }
 
+  /// Sends or enqueues an error event.
+  void addError(Object error, [StackTrace? stackTrace]) {
+    _controller.addError(error, stackTrace);
+  }
+
   /// Close the auth stream controller.
   void close() {
     _controller.close();
