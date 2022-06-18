@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio_refresh_bot/src/auth_token.dart';
 import 'package:dio_refresh_bot/src/token_storage.dart';
 
 /// Function for refresh token and return a new one

@@ -1,7 +1,14 @@
-name: flutter_bots
+name: flutterbots
 
 packages:
   - packages/**
+
+
+sdkPath: .fvm/flutter_sdk
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
 
 scripts:
 

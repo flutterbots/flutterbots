@@ -5,10 +5,8 @@ import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 void main() {
   final dio = Dio();
 
-  final storage = BotMemoryTokenStorage<AuthToken>(
-    initValue: () {
-      // Todo: read from storage
-    },
+  final storage = BotMemoryTokenStorageWrapper<AuthToken>(
+    // initValue: null,
     onDeleted: () {
       // Todo: delete from storage
       return null;

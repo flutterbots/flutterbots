@@ -55,8 +55,8 @@ class BotMemoryStorage<T> extends BotStorage<T> with BotStorageMixin<T> {
 
 /// A wrapper concrete class for [BotStorage] interface
 class BotStorageWrapper<T> extends BotStorage<T> with BotStorageMixin<T> {
-  /// Provide [read], [write] and [delete] callbacks
-  /// instead of implementing [BotStorage] interface directly
+  /// Provide [read], [write] and [delete] callbacks instead of
+  /// implementing [BotStorage] interface directly
   BotStorageWrapper({
     required ReadCallback<T> read,
     required WriteCallback<T> write,
@@ -85,6 +85,38 @@ class BotStorageWrapper<T> extends BotStorage<T> with BotStorageMixin<T> {
     super.delete();
     return _delete();
   }
+}
+
+/// A wrapper concrete class for [BotMemoryStorage] interface
+class BotMemoryStorageWrapper<T> extends BotMemoryStorage<T> {
+  /// Provide [onUpdated] and [onDeleted] callbacks, in addition to [initValue]
+  /// instead of implementing [BotMemoryStorage] interface directly
+  BotMemoryStorageWrapper({
+    DeleteCallback<T>? onDeleted,
+    WriteCallback<T>? onUpdated,
+    T? initValue,
+  })  : _onUpdated = onUpdated,
+        _delete = onDeleted,
+        _initValue = initValue;
+
+  final WriteCallback<T>? _onUpdated;
+  final DeleteCallback<T>? _delete;
+  final T? _initValue;
+
+  @override
+  FutureOr<void> write(T? value) {
+    super.write(value);
+    return _onUpdated?.call(value);
+  }
+
+  @override
+  FutureOr<void> delete() {
+    super.delete();
+    return _delete?.call();
+  }
+
+  @override
+  T? get initValue => _initValue;
 }
 
 /// Mixin that added reactive behavior to [BotStorage]
