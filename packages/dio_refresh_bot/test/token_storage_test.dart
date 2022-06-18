@@ -28,81 +28,6 @@ class MockBotTokenStorage extends BotTokenStorage<MockAuthToken> {
 }
 
 void main() {
-  group('AuthToken', () {
-    late AuthToken authToken;
-    late AuthToken authToken2;
-    late Map<String, dynamic> mapMatcher;
-    setUp(() {
-      authToken = const AuthToken(
-        accessToken: 'accessToken',
-        expiresIn: 98,
-        refreshToken: 'refreshToken',
-        tokenType: 'tokenType',
-      );
-      authToken2 = const AuthToken(
-        accessToken: 'accessToken',
-        expiresIn: 98,
-        refreshToken: 'refreshToken',
-        tokenType: 'tokenType',
-      );
-      mapMatcher = <String, dynamic>{
-        'accessToken': 'accessToken',
-        'tokenType': 'tokenType',
-        'refreshToken': 'refreshToken',
-        'expiresIn': 98,
-      };
-    });
-
-    test('to map', () {
-      expect(authToken.toMap(), mapMatcher);
-    });
-
-    test('from map', () {
-      expect(AuthToken.fromMap(mapMatcher), authToken);
-    });
-
-    test('to string', () {
-      expect(
-        authToken.toString(),
-        'AuthToken$mapMatcher',
-      );
-    });
-
-    group('token equality', () {
-      test('token equality with same values', () {
-        expect(authToken == authToken2, isTrue);
-      });
-
-      test('token equality with different [accessToken] value', () {
-        expect(
-          authToken == authToken2.copyWith(accessToken: 'newAccessToken'),
-          isFalse,
-        );
-      });
-
-      test('token equality with different [refreshToken] value', () {
-        expect(
-          authToken == authToken2.copyWith(refreshToken: 'newRefreshToken'),
-          isFalse,
-        );
-      });
-
-      test('token equality with different [expiresIn] value', () {
-        expect(
-          authToken == authToken2.copyWith(expiresIn: 99),
-          isFalse,
-        );
-      });
-
-      test('token equality with different [tokenType] value', () {
-        expect(
-          authToken == authToken2.copyWith(tokenType: 'newTokenType'),
-          isFalse,
-        );
-      });
-    });
-  });
-
   test('AuthStatus toString', () {
     expect(
       AuthStatus.unauthenticated(message: 'message').toString(),
@@ -110,11 +35,16 @@ void main() {
     );
   });
 
+  late MockAuthToken mockAuthToken;
+  setUpAll(() {
+    mockAuthToken = MockAuthToken();
+  });
+
   group('Bot Memory Token Storage', () {
-    late BotMemoryTokenStorage<MockAuthToken> botMemoryTokenStorage;
+    late BotMemoryTokenStorageWrapper<MockAuthToken> botMemoryTokenStorage;
 
     setUp(() {
-      botMemoryTokenStorage = BotMemoryTokenStorage();
+      botMemoryTokenStorage = BotMemoryTokenStorageWrapper();
     });
 
     test('init token should be null and emit it', () {
@@ -134,9 +64,9 @@ void main() {
     test(
         'write should change memory token and emit it '
         'and change authenticationStatus', () async {
-      await botMemoryTokenStorage.write(MockAuthToken());
+      await botMemoryTokenStorage.write(mockAuthToken);
       expect(botMemoryTokenStorage.value, isA<MockAuthToken>());
-      expect(botMemoryTokenStorage.stream, emits(isA<MockAuthToken>()));
+      expect(botMemoryTokenStorage.stream, emits(mockAuthToken));
       expect(
         botMemoryTokenStorage.authenticationStatus.map((event) => event.status),
         emits(Status.authenticated),
@@ -155,7 +85,7 @@ void main() {
     });
 
     test('just first delete should emit new authenticationStatus', () async {
-      await botMemoryTokenStorage.write(MockAuthToken());
+      await botMemoryTokenStorage.write(mockAuthToken);
       botMemoryTokenStorage
         ..delete()
         ..delete();
@@ -166,7 +96,7 @@ void main() {
     });
 
     test('delete with message', () async {
-      await botMemoryTokenStorage.write(MockAuthToken());
+      await botMemoryTokenStorage.write(mockAuthToken);
       await botMemoryTokenStorage.delete('token deleted 🤯');
       expect(
         botMemoryTokenStorage.authenticationStatus
@@ -200,7 +130,7 @@ void main() {
     test(
         'write should change mixin token value and emit it and change authenticationStatus',
         () async {
-      await botTokenStorage.write(MockAuthToken());
+      await botTokenStorage.write(mockAuthToken);
       expect(botTokenStorage.value, isA<MockAuthToken>());
       expect(botTokenStorage.stream, emits(isA<MockAuthToken>()));
       expect(

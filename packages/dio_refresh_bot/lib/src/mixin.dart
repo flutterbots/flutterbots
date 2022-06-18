@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bot_storage/bot_storage.dart';
+import 'package:dio_refresh_bot/src/auth_token.dart';
 import 'package:dio_refresh_bot/src/token_storage.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/subjects.dart';
