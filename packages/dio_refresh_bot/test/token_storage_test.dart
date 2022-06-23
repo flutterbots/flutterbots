@@ -6,7 +6,8 @@ import 'package:test/test.dart';
 
 class MockAuthToken extends Mock implements AuthToken {}
 
-class MockBotTokenStorage extends BotTokenStorage<MockAuthToken> {
+class MockBotTokenStorage extends BotTokenStorage<MockAuthToken>
+    with RefreshBotMixin {
   MockAuthToken? storageValue;
 
   @override
@@ -27,6 +28,9 @@ class MockBotTokenStorage extends BotTokenStorage<MockAuthToken> {
   }
 }
 
+class BotMemoryTokenStorageImpl extends BotMemoryTokenStorage<MockAuthToken>
+    with RefreshBotMixin {}
+
 void main() {
   test('AuthStatus toString', () {
     expect(
@@ -41,10 +45,10 @@ void main() {
   });
 
   group('Bot Memory Token Storage', () {
-    late BotMemoryTokenStorageWrapper<MockAuthToken> botMemoryTokenStorage;
+    late BotMemoryTokenStorageImpl botMemoryTokenStorage;
 
     setUp(() {
-      botMemoryTokenStorage = BotMemoryTokenStorageWrapper();
+      botMemoryTokenStorage = BotMemoryTokenStorageImpl();
     });
 
     test('init token should be null and emit it', () {
@@ -86,9 +90,14 @@ void main() {
 
     test('just first delete should emit new authenticationStatus', () async {
       await botMemoryTokenStorage.write(mockAuthToken);
-      botMemoryTokenStorage
-        ..delete()
-        ..delete();
+      Future.delayed(
+        Duration.zero,
+        () async {
+          botMemoryTokenStorage
+            ..delete()
+            ..delete();
+        },
+      );
       await expectLater(
         botMemoryTokenStorage.authenticationStatus.map((event) => event.status),
         emitsInOrder(<Status>[Status.authenticated, Status.unauthenticated]),
