@@ -5,15 +5,7 @@ import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 void main() {
   final dio = Dio();
 
-  final storage = BotMemoryTokenStorageWrapper<AuthToken>(
-    // initValue: null,
-    onDeleted: () {
-      // Todo: delete from storage
-      return null;
-    },
-    // Todo: update storage with new token
-    onUpdated: (token) {},
-  );
+  final storage = BotMemoryTokenStorage<AuthToken>();
 
   dio.interceptors.add(
     RefreshTokenInterceptor<AuthToken>(
@@ -33,5 +25,5 @@ void main() {
   storage.stream.listen(print);
 
   // listen to auth state changes
-  storage.authenticationStatus.listen(print);
+  // storage.authenticationStatus.listen(print);
 }
