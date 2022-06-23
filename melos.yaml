@@ -20,4 +20,10 @@ scripts:
 
   fix_hints: melos exec -- "dart fix —apply ."
 
-
+  test_coverage:
+     run: |
+          melos exec -- "very_good test --coverage"
+          melos exec genhtml -o ./coverage/report ./coverage/lcov.info
+     select-package:
+       dir-exists:
+         - test
