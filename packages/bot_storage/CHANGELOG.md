@@ -1,5 +1,11 @@
 
 
+## 1.0.5
+
+* test: add test files
+* fix: fix read callback
+
+
 ## 1.0.4
 
 * build: downgrade meta to 1.7.0
