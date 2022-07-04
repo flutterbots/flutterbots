@@ -1,6 +1,6 @@
 name: dio_refresh_bot
 description: Dio interceptor which makes refresh token mechanism simple, flexible and reactive.
-version: 1.0.4
+version: 1.0.5
 homepage: https://github.com/flutterbots/flutterbots
 
 environment:
