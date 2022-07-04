@@ -1,4 +1,6 @@
+## 1.0.5
 
+* test: add test files
 
 ## 1.0.4
 
