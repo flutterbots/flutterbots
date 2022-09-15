@@ -15,7 +15,7 @@
 
 ## 1.0.4
 
-* build: upgrade bot_storage to 1.0.4 
+* build: pump up bot_storage to 1.0.4 
 
 ## 1.0.3+1
 
@@ -25,7 +25,7 @@
 
 * feat: add equatable implantation to AuthToken class.
 * fix: add should refresh to onRequest.
-* build: upgrade dependencies.
+* build: pump up dependencies.
 
 
 ## 1.0.2
