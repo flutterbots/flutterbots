@@ -1,3 +1,8 @@
+## 2.0.0+1
+
+- **FIX**: downgrade `bot_storage` to released version.
+- **BREAKING**: remove un-needed dio from `RefreshTokenInterceptor`.
+
 ## 2.0.0
 
 > Note: This release has breaking changes.
