@@ -31,15 +31,13 @@ typedef _OnError = void Function(DioError error);
 class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   ///
   RefreshTokenInterceptor({
-    Dio? dio,
     required this.tokenStorage,
     required this.refreshToken,
     this.onRevoked,
     this.tokenProtocol = const TokenProtocol(),
     Dio? tokenDio,
     this.tokenHeaderBuilder,
-  })  : _dio = dio ?? Dio(),
-        _tokenDio = tokenDio ?? Dio(dio?.options);
+  }) : _tokenDio = tokenDio ?? Dio();
 
   /// This function called when we should refresh the token
   /// and Its returns a new token
@@ -67,8 +65,6 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   final TokenProtocol tokenProtocol;
 
   final Dio _tokenDio;
-
-  final Dio _dio;
 
   @override
   Future<void> onRequest(
@@ -187,7 +183,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     RequestOptions requestOptions,
     T token,
   ) {
-    return _dio.fetch<dynamic>(
+    return _tokenDio.fetch<dynamic>(
       requestOptions
         ..headers.addAll(
           _headersBuilder(token),

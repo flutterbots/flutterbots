@@ -9,11 +9,10 @@ void main() {
 
   dio.interceptors.add(
     RefreshTokenInterceptor<AuthToken>(
-      dio: dio,
       tokenStorage: storage,
       refreshToken: (token, tokenDio) async {
         final response = await tokenDio.post<dynamic>(
-          '/refresh',
+          'https://example/refresh',
           data: {'refreshToken': token.refreshToken},
         );
 
