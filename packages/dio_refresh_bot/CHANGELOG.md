@@ -1,8 +1,15 @@
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: add shouldRefresh implementation for onRequest.
+ - **BREAKING**: remove un-needed dio from `RefreshTokenInterceptor`.
+
 ## 1.0.6
 
 * chore: fix local path conflict with bot_storage
 
-* ## 1.0.5
+## 1.0.5
 
 * test: add test files
 
