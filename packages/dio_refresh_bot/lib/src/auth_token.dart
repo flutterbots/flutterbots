@@ -5,7 +5,7 @@ class AuthToken extends Equatable {
   ///
   const AuthToken({
     required this.accessToken,
-    this.tokenType = 'bearer',
+    this.tokenType = defaultTokenType,
     this.refreshToken,
     this.expiresIn,
   });
@@ -14,11 +14,14 @@ class AuthToken extends Equatable {
   factory AuthToken.fromMap(Map<String, dynamic> map) {
     return AuthToken(
       accessToken: map['accessToken'] as String,
-      tokenType: map['tokenType'] as String,
+      tokenType: (map['tokenType'] ?? defaultTokenType) as String,
       refreshToken: map['refreshToken'] as String?,
       expiresIn: map['expiresIn'] as int?,
     );
   }
+
+  /// The default type of JWT token.
+  static const defaultTokenType = 'bearer';
 
   /// The access token as a string.
   final String accessToken;
