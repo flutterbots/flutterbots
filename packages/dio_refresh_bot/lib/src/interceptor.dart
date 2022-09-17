@@ -171,7 +171,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   }) async {
     return refreshToken(token, _tokenDio).then(
       (newToken) async {
-        tokenStorage.write(newToken);
+        await tokenStorage.write(newToken);
         try {
           final response = await _requestRetry(
             options,
