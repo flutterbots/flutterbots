@@ -31,8 +31,8 @@ abstract class BotTokenStorage<T extends AuthToken> extends BotStorage<T>
 
 /// Memory storage to store and retrieve tokens in memory.
 /// read, write, and delete the `value` from memory
-class BotMemoryTokenStorage<T extends AuthToken>
-    extends BotMemoryStorage<T> with BotTokenStorageType<T> {
+class BotMemoryTokenStorage<T extends AuthToken> extends BotMemoryStorage<T>
+    with BotTokenStorageType<T> {
   @mustCallSuper
   @override
   FutureOr<void> delete([String? message]) async {
