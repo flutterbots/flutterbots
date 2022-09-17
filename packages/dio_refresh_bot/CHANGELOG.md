@@ -1,6 +1,10 @@
+## 2.1.1
+
+- **FEAT**: add defaultTokenType `bearer' to `AuthToken.fromMap`.
+
 ## 2.1.0
 
-- **Feat**: add optional debugLog for refreshToken request.
+- **FEAT**: add optional debugLog for refreshToken request.
 - **FIX**: handle `refreshToken` error when his type is not `DioError`.
 
 ## 2.0.0+1
@@ -16,11 +20,11 @@
 
 ## 1.0.5
 
-* test: add test files
+* test: add test files.
 
 ## 1.0.4
 
-* build: pump up bot_storage to 1.0.4
+* chore: pump up dependencies.
 
 ## 1.0.3+1
 
@@ -28,18 +32,18 @@
 
 ## 1.0.3
 
-* feat: add equatable implantation to AuthToken class.
+* feat: AuthToken implements `Equatable`.
 * fix: add should refresh to onRequest.
-* build: pump up dependencies.
+* chore: pump up dependencies.
 
 ## 1.0.2
 
 * fix: token stream event has not been added.
-* update example
+* update example.
 
 ## 1.0.0+1
 
-* add readme
+* add readme.
 
 ## 1.0.0
 
