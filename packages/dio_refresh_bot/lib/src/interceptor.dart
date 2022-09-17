@@ -36,8 +36,18 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     this.onRevoked,
     this.tokenProtocol = const TokenProtocol(),
     Dio? tokenDio,
+    this.debugLog = false,
     this.tokenHeaderBuilder,
-  }) : _tokenDio = tokenDio ?? Dio();
+  }) : _tokenDio = tokenDio ?? Dio() {
+    if (debugLog && tokenDio == null) {
+      _tokenDio.interceptors.add(
+        LogInterceptor(
+          requestBody: true,
+          responseBody: true,
+        ),
+      );
+    }
+  }
 
   /// This function called when we should refresh the token
   /// and Its returns a new token
@@ -63,6 +73,9 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
 
   /// The [TokenProtocol] for refresh token process
   final TokenProtocol tokenProtocol;
+
+  /// If it is enabled will print logs during refresh token request.
+  final bool debugLog;
 
   final Dio _tokenDio;
 
