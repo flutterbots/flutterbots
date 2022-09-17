@@ -5,10 +5,6 @@
 
 ## 2.0.0+1
 
-- **FIX**: downgrade `bot_storage` to released version.
-
-## 2.0.0
-
 > Note: This release has breaking changes.
 
 - **FIX**: add shouldRefresh implementation for onRequest.
