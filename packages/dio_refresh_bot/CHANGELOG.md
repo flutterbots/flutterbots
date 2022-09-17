@@ -1,14 +1,18 @@
+## 2.1.0
+
+- **Feat**: add optional debugLog for refreshToken request.
+- **FIX**: handle `refreshToken` error when his type is not `DioError`.
+
 ## 2.0.0+1
 
 - **FIX**: downgrade `bot_storage` to released version.
-- **BREAKING**: remove un-needed dio from `RefreshTokenInterceptor`.
 
 ## 2.0.0
 
 > Note: This release has breaking changes.
 
- - **FIX**: add shouldRefresh implementation for onRequest.
- - **BREAKING**: remove un-needed dio from `RefreshTokenInterceptor`.
+- **FIX**: add shouldRefresh implementation for onRequest.
+- **BREAKING**: remove un-needed dio from `RefreshTokenInterceptor`.
 
 ## 1.0.6
 
@@ -20,7 +24,7 @@
 
 ## 1.0.4
 
-* build: pump up bot_storage to 1.0.4 
+* build: pump up bot_storage to 1.0.4
 
 ## 1.0.3+1
 
@@ -32,12 +36,10 @@
 * fix: add should refresh to onRequest.
 * build: pump up dependencies.
 
-
 ## 1.0.2
 
-* fix: token stream  event has not been added.
+* fix: token stream event has not been added.
 * update example
-
 
 ## 1.0.0+1
 
