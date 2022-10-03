@@ -1,3 +1,7 @@
+## 2.1.2
+
+- **FIX**: build token header for `onRequest`.
+
 ## 2.1.1
 
 - **FEAT**: add defaultTokenType `bearer' to `AuthToken.fromMap`.
