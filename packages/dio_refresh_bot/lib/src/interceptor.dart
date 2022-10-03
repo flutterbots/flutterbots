@@ -86,6 +86,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   ) async {
     var token = tokenStorage.read();
     if (token != null) {
+      _buildHeader(options, token);
       if (tokenProtocol.shouldRefresh(null, token)) {
         await _refreshHandler(
           token,
@@ -100,7 +101,6 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
       }
       // Will be completed if error occurred in [_refreshHandler]
       if (!handler.isCompleted) {
-        _buildHeader(options, token!);
         handler.next(options);
       }
     } else {
