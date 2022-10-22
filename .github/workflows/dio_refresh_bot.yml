@@ -1,4 +1,4 @@
-name: Refresh Bot Test Work
+name: Test
 
 on:
   push:
