@@ -9,6 +9,7 @@ class BotStorageMemoryImpl extends BotMemoryStorage<String> {
 
 class BotStorageImpl extends BotStorage<String> with BotStorageMixin<String> {
   BotStorageImpl(this._storage);
+
   final FakeStorage _storage;
 
   @override
@@ -19,26 +20,18 @@ class BotStorageImpl extends BotStorage<String> with BotStorageMixin<String> {
 
   @override
   String? read() {
-    return _storage.getString();
+    return _storage.value;
   }
 
   @override
   FutureOr<void> write(String? value) async {
     super.write(value);
-    _storage.setString(value);
+    _storage.value = value;
   }
 }
 
 class FakeStorage {
   String? value;
-
-  void setString(String? value) {
-    this.value = value;
-  }
-
-  String? getString() {
-    return value;
-  }
 
   void remove() {
     value = null;

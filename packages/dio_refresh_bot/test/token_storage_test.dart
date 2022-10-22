@@ -137,8 +137,8 @@ void main() {
     });
 
     test(
-        'write should change mixin token value and emit it and change authenticationStatus',
-        () async {
+        'write should change mixin token value and emit it and '
+        'change authenticationStatus', () async {
       await botTokenStorage.write(mockAuthToken);
       expect(botTokenStorage.value, isA<MockAuthToken>());
       expect(botTokenStorage.stream, emits(isA<MockAuthToken>()));

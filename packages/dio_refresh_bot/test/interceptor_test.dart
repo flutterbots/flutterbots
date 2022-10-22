@@ -95,8 +95,8 @@ void main() {
     late MockErrorInterceptorHandler errorInterceptorHandler;
     late MockDioError dioError;
     late MockException mockException;
-    late MockResponse response;
-    late MockResponse successResponse;
+    late MockResponse<dynamic> response;
+    late MockResponse<dynamic> successResponse;
     late MockAuthToken mockAuthToken;
     late MockAuthToken newMockAuthToken;
     late MockDio dio;
