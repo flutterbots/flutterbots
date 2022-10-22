@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dio_refresh_bot/src/auth_token.dart';
 import 'package:dio_refresh_bot/src/token_storage.dart';
+import 'package:meta/meta.dart';
 
 /// Function for refresh token and return a new one
 typedef RefreshToken<T> = Future<T> Function(T token, Dio tokenDio);
@@ -79,6 +80,10 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
 
   final Dio _tokenDio;
 
+  ///no-doc
+  @visibleForTesting
+  Dio get dio => _tokenDio;
+
   @override
   Future<void> onRequest(
     RequestOptions options,
@@ -93,14 +98,14 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
           options,
           onResponse: (response) {
             token = tokenStorage.read();
+            _buildHeader(options, token!);
+            handler.resolve(response);
           },
           onError: (error) {
             handler.reject(error);
           },
         );
-      }
-      // Will be completed if error occurred in [_refreshHandler]
-      if (!handler.isCompleted) {
+      } else {
         handler.next(options);
       }
     } else {
@@ -141,25 +146,41 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     required _OnResponse onResponse,
     required _OnError onError,
   }) async {
-    // if current storageToken not equal request token
-    // then => refreshToken has done by another intercept process
-    if (storageToken != options.token) {
-      // retry with new storageToken
-      await _requestRetry(
-        options,
-        storageToken,
-      ).then((response) {
-        onResponse(response);
-      }).catchError((Object error, StackTrace stackTrace) {
-        onError(error as DioError);
-      });
-    } else {
-      await _refreshToken(
-        storageToken,
-        options,
-        onError: onError,
-        onResponse: onResponse,
-      );
+    try {
+      // if current storageToken not equal request token
+      // then => refreshToken has done by another intercept process
+      if (storageToken != options.token) {
+        // retry with new storageToken
+        await _requestRetry(
+          options,
+          storageToken,
+        ).then(onResponse);
+      } else {
+        await _refreshToken(
+          storageToken,
+          options,
+          onResponse: onResponse,
+        );
+      }
+    } catch (error, stackTrace) {
+      late final DioError dioError;
+
+      if (error is! DioError) {
+        dioError = DioError(
+          requestOptions: options,
+          error: error,
+        );
+      } else {
+        dioError = error;
+      }
+
+      dioError.stackTrace = stackTrace;
+
+      if (tokenProtocol.shouldRevokeToken(dioError)) {
+        await tokenStorage.delete(onRevoked?.call(dioError));
+      }
+
+      onError(dioError);
     }
   }
 
@@ -167,36 +188,15 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     T token,
     RequestOptions options, {
     required _OnResponse onResponse,
-    required _OnError onError,
   }) async {
-    return refreshToken(token, _tokenDio).then(
-      (newToken) async {
-        await tokenStorage.write(newToken);
-        try {
-          final response = await _requestRetry(
-            options,
-            newToken,
-          );
-          onResponse(response);
-        } on DioError catch (error) {
-          onError(error);
-        }
-      },
-    ).catchError(
-      (Object error, StackTrace stackTrace) async {
-        if (error is DioError) {
-          await tokenStorage.delete(onRevoked?.call(error));
-          onError(error);
-        } else {
-          onError(
-            DioError(
-              requestOptions: options,
-              error: Error.throwWithStackTrace(error, stackTrace),
-            ),
-          );
-        }
-      },
+    final newToken = await refreshToken(token, _tokenDio);
+    await tokenStorage.write(newToken);
+
+    final response = await _requestRetry(
+      options,
+      newToken,
     );
+    onResponse(response);
   }
 
   Future<Response> _requestRetry(
