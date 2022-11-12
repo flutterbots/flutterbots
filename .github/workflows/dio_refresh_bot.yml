@@ -26,7 +26,6 @@ jobs:
      runs-on: ubuntu-latest
      steps:
        - name: uploads covreage report
-         working-directory: "packages/dio_refresh_bot"
          run: curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov -t ${CODECOV_TOKEN}
