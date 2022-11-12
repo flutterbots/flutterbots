@@ -9,11 +9,26 @@ class MockTokenProtocol extends Mock implements TokenProtocol {}
 
 class MockDio extends Mock implements Dio {}
 
+class MockRequestOptions extends Mock implements RequestOptions {}
+
 class MockResponse<T> extends Mock implements Response<T> {}
 
 class MockDioError extends Mock implements DioError {}
 
+class MockException extends Mock implements Exception {}
+
+class MockRequestInterceptorHandler extends Mock
+    implements RequestInterceptorHandler {}
+
+class MockErrorInterceptorHandler extends Mock
+    implements ErrorInterceptorHandler {}
+
 void main() {
+  setUpAll(() {
+    registerFallbackValue(MockResponse<dynamic>());
+    registerFallbackValue(MockDioError());
+  });
+
   group('TokenProtocol', () {
     late TokenProtocol tokenProtocol;
     late MockResponse<Object> mockResponse;
@@ -46,6 +61,7 @@ void main() {
         false,
       );
     });
+
     test('by default shouldRevokeToken must return true if statusCode=401', () {
       when(() => mockResponse.statusCode).thenReturn(401);
       when(() => mockDioError.response).thenReturn(mockResponse);
@@ -54,6 +70,7 @@ void main() {
         true,
       );
     });
+
     test(
         'shouldRevokeToken must return false if response is not compatible with'
         ' passed shouldRevokeToken method', () {
@@ -69,37 +86,71 @@ void main() {
     });
   });
 
-  group('onRequest', () {
-    late MockBotTokenStorage botTokenStorage;
+  group('Interceptor', () {
+    late BotTokenStorageImpl botTokenStorage;
     late RefreshTokenInterceptor interceptor;
     late RequestOptions requestOptions;
-    late RequestInterceptorHandler requestHandler;
+    late MockRequestOptions refreshRequestOptions;
+    late MockRequestInterceptorHandler requestInterceptorHandler;
+    late MockErrorInterceptorHandler errorInterceptorHandler;
+    late MockDioError dioError;
+    late MockException mockException;
+    late MockResponse<dynamic> response;
+    late MockResponse<dynamic> successResponse;
+    late MockAuthToken mockAuthToken;
+    late MockAuthToken newMockAuthToken;
+    late MockDio dio;
     setUp(() {
-      botTokenStorage = MockBotTokenStorage();
-      requestHandler = RequestInterceptorHandler();
+      botTokenStorage = BotTokenStorageImpl();
+      requestInterceptorHandler = MockRequestInterceptorHandler();
+      errorInterceptorHandler = MockErrorInterceptorHandler();
       requestOptions = RequestOptions(path: '');
+      refreshRequestOptions = MockRequestOptions();
+      dioError = MockDioError();
+      mockException = MockException();
+      response = MockResponse<dynamic>();
+      successResponse = MockResponse<dynamic>();
+      mockAuthToken = MockAuthToken();
+      newMockAuthToken = MockAuthToken();
+      dio = MockDio();
+      requestOptions.extra['__auth_token__'] = mockAuthToken;
     });
 
-    test('token still Null and return unauthenticatedStatus if token is null',
-        () async {
+    test('Logger', () async {
+      interceptor = RefreshTokenInterceptor(
+        tokenStorage: botTokenStorage,
+        debugLog: true,
+        refreshToken: (_, __) async {
+          return MockAuthToken();
+        },
+      );
+      expect(
+        interceptor.dio.interceptors.any(
+          (element) => element is LogInterceptor,
+        ),
+        true,
+      );
+    });
+
+    test(
+        '[onRequest] Continue to call the next request interceptor with '
+        'absent token header', () async {
       interceptor = RefreshTokenInterceptor(
         tokenStorage: botTokenStorage,
         refreshToken: (_, __) async {
           return MockAuthToken();
         },
       );
-      await interceptor.onRequest(requestOptions, requestHandler);
-      expect(botTokenStorage.read(), isNull);
-      expect(botTokenStorage.stream, emits(isNull));
-      expect(
-        botTokenStorage.authenticationStatus.map((event) => event.status),
-        emits(Status.unauthenticated),
-      );
+      await interceptor.onRequest(requestOptions, requestInterceptorHandler);
+      expect(requestOptions.headers['Authorization'], isNull);
+      verify(
+        () => requestInterceptorHandler.next(requestOptions),
+      ).called(1);
     });
 
     test(
-        'return exist Token and return authenticationStatus'
-        ' if shouldRefresh => false', () async {
+        '[onRequest] Continue to call the next request interceptor '
+        'with token header', () async {
       final mockAuthToken = MockAuthToken();
       when(() => mockAuthToken.accessToken).thenReturn('access-token');
       when(() => mockAuthToken.tokenType).thenReturn('bearer');
@@ -111,74 +162,205 @@ void main() {
         },
         tokenProtocol: TokenProtocol(shouldRefresh: (_, __) => false),
       );
-      await interceptor.onRequest(requestOptions, requestHandler);
-      expect(botTokenStorage.stream, emits(mockAuthToken));
+      await interceptor.onRequest(requestOptions, requestInterceptorHandler);
       expect(
-        botTokenStorage.authenticationStatus.map((event) => event.status),
-        emits(Status.authenticated),
+        requestOptions.headers['Authorization'],
+        '${mockAuthToken.tokenType} ${mockAuthToken.accessToken}',
+      );
+      verify(
+        () => requestInterceptorHandler.next(requestOptions),
+      ).called(1);
+    });
+
+    test('[onRequest] Refresh token will be triggered if token is expired',
+        () async {
+      when(() => mockAuthToken.accessToken).thenReturn('access-token');
+      when(() => mockAuthToken.tokenType).thenReturn('bearer');
+      when(() => newMockAuthToken.accessToken).thenReturn('new-access-token');
+      when(() => newMockAuthToken.tokenType).thenReturn('new-bearer');
+      when(() => dio.fetch<dynamic>(requestOptions))
+          .thenAnswer((invocation) async => successResponse);
+      await botTokenStorage.write(mockAuthToken);
+      interceptor = RefreshTokenInterceptor(
+        tokenStorage: botTokenStorage,
+        tokenDio: dio,
+        refreshToken: (_, __) async {
+          return newMockAuthToken;
+        },
+        tokenProtocol: TokenProtocol(
+          shouldRefresh: (_, __) => true,
+        ),
+      );
+      await interceptor.onRequest(requestOptions, requestInterceptorHandler);
+      expect(
+        requestOptions.headers['Authorization'],
+        '${newMockAuthToken.tokenType} ${newMockAuthToken.accessToken}',
+      );
+      verify(
+        () => requestInterceptorHandler.resolve(successResponse),
+      ).called(1);
+      expect(botTokenStorage.read(), newMockAuthToken);
+    });
+
+    test(
+        '[onRequest][Fail][shouldRevokeToken => false] '
+        'Refresh token will be triggered if token is expired', () async {
+      when(() => mockAuthToken.accessToken).thenReturn('access-token');
+      when(() => mockAuthToken.tokenType).thenReturn('bearer');
+      await botTokenStorage.write(mockAuthToken);
+      interceptor = RefreshTokenInterceptor(
+        tokenStorage: botTokenStorage,
+        tokenDio: dio,
+        refreshToken: (_, __) async {
+          throw dioError;
+        },
+        tokenProtocol: TokenProtocol(
+          shouldRefresh: (_, __) => true,
+          shouldRevokeToken: (_) => false,
+        ),
+      );
+      await interceptor.onRequest(requestOptions, requestInterceptorHandler);
+      verify(
+        () => requestInterceptorHandler.reject(dioError),
+      ).called(1);
+      expect(botTokenStorage.read(), mockAuthToken);
+    });
+
+    test(
+        '[onRequest][Fail][shouldRevokeToken => true] Refresh token will be '
+        'triggered if token is expired', () async {
+      when(() => mockAuthToken.accessToken).thenReturn('access-token');
+      when(() => mockAuthToken.tokenType).thenReturn('bearer');
+      await botTokenStorage.write(mockAuthToken);
+      interceptor = RefreshTokenInterceptor(
+        tokenStorage: botTokenStorage,
+        tokenDio: dio,
+        refreshToken: (_, __) async {
+          throw dioError;
+        },
+        tokenProtocol: TokenProtocol(
+          shouldRefresh: (_, __) => true,
+          shouldRevokeToken: (_) => true,
+        ),
+      );
+      await interceptor.onRequest(requestOptions, requestInterceptorHandler);
+      verify(
+        () => requestInterceptorHandler.reject(dioError),
+      ).called(1);
+      expect(botTokenStorage.read(), null);
+    });
+
+    test('[onError] with error other than 401', () async {
+      when(() => response.statusCode).thenReturn(500);
+      when(() => dioError.response).thenReturn(response);
+      when(() => dioError.requestOptions).thenReturn(requestOptions);
+
+      await botTokenStorage.write(mockAuthToken);
+      interceptor = RefreshTokenInterceptor(
+        tokenStorage: botTokenStorage,
+        refreshToken: (_, __) async => MockAuthToken(),
+      );
+
+      await interceptor.onError(dioError, errorInterceptorHandler);
+      verifyNever(
+        () => mockAuthToken.accessToken,
+      );
+      verify(
+        () => errorInterceptorHandler.next(dioError),
+      ).called(1);
+      expect(botTokenStorage.read(), mockAuthToken);
+    });
+
+    test('[onError] refresh token throwing an error other than DioError',
+        () async {
+      when(() => mockAuthToken.accessToken).thenReturn('access-token');
+      when(() => mockAuthToken.tokenType).thenReturn('bearer');
+      when(() => response.statusCode).thenReturn(401);
+      when(() => dioError.response).thenReturn(response);
+      when(() => dioError.requestOptions).thenReturn(requestOptions);
+
+      await botTokenStorage.write(mockAuthToken);
+      interceptor = RefreshTokenInterceptor(
+        tokenStorage: botTokenStorage,
+        refreshToken: (_, __) => throw mockException,
+      );
+
+      await interceptor.onError(dioError, errorInterceptorHandler);
+      verify(
+        () => errorInterceptorHandler.next(any()),
+      ).called(1);
+      expect(botTokenStorage.read(), mockAuthToken);
+    });
+
+    test('[onError] Refresh token when response status code is 401', () async {
+      when(() => mockAuthToken.accessToken).thenReturn('access-token');
+      when(() => mockAuthToken.tokenType).thenReturn('bearer');
+      when(() => newMockAuthToken.accessToken).thenReturn('new-access-token');
+      when(() => newMockAuthToken.tokenType).thenReturn('new-bearer');
+      when(() => response.statusCode).thenReturn(401);
+      when(() => successResponse.statusCode).thenReturn(200);
+      when(() => successResponse.requestOptions).thenReturn(requestOptions);
+      when(() => dioError.response).thenReturn(response);
+      when(() => dioError.requestOptions).thenReturn(requestOptions);
+      when(() => dio.fetch<dynamic>(requestOptions)).thenAnswer(
+        (_) async => successResponse,
+      );
+
+      await botTokenStorage.write(mockAuthToken);
+      interceptor = RefreshTokenInterceptor(
+        tokenDio: dio,
+        tokenStorage: botTokenStorage,
+        refreshToken: (_, __) async => newMockAuthToken,
+        tokenProtocol: TokenProtocol(shouldRefresh: (_, __) => true),
+      );
+      await interceptor.onError(dioError, errorInterceptorHandler);
+
+      verify(
+        () => errorInterceptorHandler.resolve(successResponse),
+      ).called(1);
+
+      expect(botTokenStorage.read(), newMockAuthToken);
+    });
+
+    test(
+        '[onError] Refresh token will be skipped when response status '
+        'code is 401 && token has been changed', () async {
+      when(() => mockAuthToken.accessToken).thenReturn('access-token');
+      when(() => mockAuthToken.tokenType).thenReturn('bearer');
+      when(() => newMockAuthToken.accessToken).thenReturn('new-access-token');
+      when(() => newMockAuthToken.tokenType).thenReturn('new-bearer');
+      when(() => response.statusCode).thenReturn(401);
+      when(() => successResponse.statusCode).thenReturn(200);
+      when(() => successResponse.requestOptions).thenReturn(requestOptions);
+      when(() => dioError.response).thenReturn(response);
+      when(() => dioError.requestOptions).thenReturn(requestOptions);
+      when(() => dio.fetch<dynamic>(requestOptions)).thenAnswer(
+        (_) async => successResponse,
+      );
+      when(() => dio.fetch<dynamic>(refreshRequestOptions)).thenAnswer(
+        (_) async => MockResponse<dynamic>(),
+      );
+
+      await botTokenStorage.write(newMockAuthToken);
+      interceptor = RefreshTokenInterceptor(
+        tokenDio: dio,
+        tokenStorage: botTokenStorage,
+        refreshToken: (_, dio) async {
+          await dio.fetch<dynamic>(refreshRequestOptions);
+          return MockAuthToken();
+        },
+      );
+      await interceptor.onError(dioError, errorInterceptorHandler);
+      expect(
+        requestOptions.headers['Authorization'],
+        '${newMockAuthToken.tokenType} ${newMockAuthToken.accessToken}',
+      );
+      verify(
+        () => errorInterceptorHandler.resolve(successResponse),
+      ).called(1);
+      verifyNever(
+        () => dio.fetch<dynamic>(refreshRequestOptions),
       );
     });
-    // test(
-    //     'return authenticated status and update token'
-    //     ' if: token is not null,'
-    //     ' refresh token request success,'
-    //     ' no another request do refreshing'
-    //     ' and shouldRefresh is true', () async {
-    //   final mockAuthToken = MockAuthToken();
-    //   final newMockAuthToken = MockAuthToken();
-    //
-    //   when(() => mockAuthToken.accessToken).thenReturn('access-token');
-    //   when(() => mockAuthToken.tokenType).thenReturn('bearer');
-    //   when(() => newMockAuthToken.accessToken).thenReturn('new-access-token');
-    //   when(() => newMockAuthToken.tokenType).thenReturn('new-bearer');
-    //   requestOptions.extra['__auth_token__'] = mockAuthToken;
-    //   botTokenStorage.write(mockAuthToken);
-    //
-    //   interceptor = RefreshTokenInterceptor(
-    //     tokenStorage: botTokenStorage,
-    //     refreshToken: (_, __) async => newMockAuthToken,
-    //     tokenProtocol: TokenProtocol(shouldRefresh: (_, __) => true),
-    //   );
-    //   await interceptor.onRequest(requestOptions, requestHandler);
-    //   expect(botTokenStorage.stream, emits(newMockAuthToken));
-    //
-    //   expect(
-    //     botTokenStorage.authenticationStatus.map((event) => event.status),
-    //     emits(Status.authenticated),
-    //   );
-    // });
-
-    //   test(
-    //       'return authenticated status, update token and retry to send request'
-    //       ' if another request already refreshed token', () async {
-    //     final mockAuthToken = MockAuthToken();
-    //     final newMockAuthToken = MockAuthToken();
-    //     final fromAnotherRequestMockAuthToken = MockAuthToken();
-    //     final mockDio = MockDio();
-    //     when(() => mockAuthToken.accessToken).thenReturn('access-token');
-    //     when(() => mockAuthToken.tokenType).thenReturn('bearer');
-    //     requestOptions.extra['__auth_token__'] = fromAnotherRequestMockAuthToken;
-    //     botTokenStorage.write(mockAuthToken);
-    //
-    //     ///ToDo: mocking dio is not working correctly
-    //     // when(() => mockDio.hashCode).thenReturn(1234);
-    //     // when(() => mockDio.fetch<dynamic>(captureAny()))
-    //     //     .thenAnswer((invocation) async {
-    //     //   print("test mock");
-    //     //   return MockResponse();
-    //     // });
-    //     interceptor = RefreshTokenInterceptor(
-    //       // dio: mockDio,
-    //       tokenStorage: botTokenStorage,
-    //       refreshToken: (_, __) async => newMockAuthToken,
-    //       tokenProtocol: TokenProtocol(shouldRefresh: (_, __) => true),
-    //     );
-    //     await interceptor.onRequest(requestOptions, requestHandler);
-    //     expect(botTokenStorage.stream, emits(fromAnotherRequestMockAuthToken));
-    //     expect(
-    //       botTokenStorage.authenticationStatus.map((event) => event.status),
-    //       emits(Status.authenticated),
-    //     );
-    //   });
   });
 }

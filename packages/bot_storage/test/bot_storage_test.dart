@@ -123,30 +123,4 @@ void main() {
       );
     },
   );
-
-  // group(
-  //   'Bot Storage Wrapper with BotStorageMixin',
-  //   () {
-  //     late BotStorageMixin botStorage;
-  //     setUp(
-  //       () {
-  //         botStorage =
-  //             BotStorageWrapper<MockValue>(read: read, write: onUpdated, delete: delete);
-  //       },
-  //     );
-  //
-  //     test(
-  //       'write and read and delete',
-  //       () {
-  //         botStorage.write(mockValue);
-  //         expect(botStorage.read(), mockValue);
-  //         expect(botStorage.stream, emits(mockValue));
-  //
-  //         botStorage.delete();
-  //         expect(botStorage.read(), isNull);
-  //         expect(botStorage.stream, emits(isNull));
-  //       },
-  //     );
-  //   },
-  // );
 }

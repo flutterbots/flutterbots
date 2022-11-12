@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:dio_refresh_bot/src/auth_token.dart';
-import 'package:dio_refresh_bot/src/token_storage.dart';
+import 'package:dio_refresh_bot/dio_refresh_bot.dart';
+import 'package:meta/meta.dart';
 
 /// Function for refresh token and return a new one
 typedef RefreshToken<T> = Future<T> Function(T token, Dio tokenDio);
@@ -8,7 +8,7 @@ typedef RefreshToken<T> = Future<T> Function(T token, Dio tokenDio);
 /// Function to decide if we need to refresh token depending on [Response]
 /// and [token] value
 typedef ShouldRefresh<T> = bool Function(
-  Response? response,
+  Response<dynamic>? response,
   T? token,
 );
 
@@ -24,8 +24,11 @@ typedef RevokeCallback = String? Function(DioError error);
 /// Function responsible for building the token header.
 typedef TokenHeaderBuilder<T> = Map<String, String> Function(T token);
 
-typedef _OnResponse = void Function(Response response);
-typedef _OnError = void Function(DioError error);
+///
+typedef OnRefreshResponse = void Function(Response<dynamic> response);
+
+///
+typedef OnRefreshError = void Function(DioError error);
 
 ///
 class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
@@ -69,7 +72,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   final BotTokenStorageType<T> tokenStorage;
 
   /// Function for building custom token header depending on stored token
-  final TokenHeaderBuilder? tokenHeaderBuilder;
+  final TokenHeaderBuilder<T>? tokenHeaderBuilder;
 
   /// The [TokenProtocol] for refresh token process
   final TokenProtocol tokenProtocol;
@@ -78,6 +81,10 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   final bool debugLog;
 
   final Dio _tokenDio;
+
+  ///no-doc
+  @visibleForTesting
+  Dio get dio => _tokenDio;
 
   @override
   Future<void> onRequest(
@@ -93,14 +100,14 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
           options,
           onResponse: (response) {
             token = tokenStorage.read();
+            _buildHeader(options, token!);
+            handler.resolve(response);
           },
           onError: (error) {
             handler.reject(error);
           },
         );
-      }
-      // Will be completed if error occurred in [_refreshHandler]
-      if (!handler.isCompleted) {
+      } else {
         handler.next(options);
       }
     } else {
@@ -138,68 +145,63 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   Future<void> _refreshHandler(
     T storageToken,
     RequestOptions options, {
-    required _OnResponse onResponse,
-    required _OnError onError,
+    required OnRefreshResponse onResponse,
+    required OnRefreshError onError,
   }) async {
-    // if current storageToken not equal request token
-    // then => refreshToken has done by another intercept process
-    if (storageToken != options.token) {
-      // retry with new storageToken
-      await _requestRetry(
-        options,
-        storageToken,
-      ).then((response) {
-        onResponse(response);
-      }).catchError((Object error, StackTrace stackTrace) {
-        onError(error as DioError);
-      });
-    } else {
-      await _refreshToken(
-        storageToken,
-        options,
-        onError: onError,
-        onResponse: onResponse,
-      );
+    try {
+      // if current storageToken not equal request token
+      // then => refreshToken has done by another intercept process
+      if (storageToken != options.token) {
+        // retry with new storageToken
+        await _requestRetry(
+          options,
+          storageToken,
+        ).then(onResponse);
+      } else {
+        await _refreshToken(
+          storageToken,
+          options,
+          onResponse: onResponse,
+        );
+      }
+    } catch (error, stackTrace) {
+      late final DioError dioError;
+
+      if (error is! DioError) {
+        dioError = DioError(
+          requestOptions: options,
+          error: error,
+        );
+      } else {
+        dioError = error;
+      }
+
+      dioError.stackTrace = stackTrace;
+
+      if (tokenProtocol.shouldRevokeToken(dioError)) {
+        await tokenStorage.delete(onRevoked?.call(dioError));
+      }
+
+      onError(dioError);
     }
   }
 
   Future<void> _refreshToken(
     T token,
     RequestOptions options, {
-    required _OnResponse onResponse,
-    required _OnError onError,
+    required OnRefreshResponse onResponse,
   }) async {
-    return refreshToken(token, _tokenDio).then(
-      (newToken) async {
-        await tokenStorage.write(newToken);
-        try {
-          final response = await _requestRetry(
-            options,
-            newToken,
-          );
-          onResponse(response);
-        } on DioError catch (error) {
-          onError(error);
-        }
-      },
-    ).catchError(
-      (Object error, StackTrace stackTrace) async {
-        if (error is DioError) {
-          await tokenStorage.delete(onRevoked?.call(error));
-          onError(error);
-        } else {
-          onError(
-            DioError(
-              requestOptions: options,
-              error: Error.throwWithStackTrace(error, stackTrace),
-            ),
-          );
-        }
-      },
+    final newToken = await refreshToken(token, _tokenDio);
+    await tokenStorage.write(newToken);
+
+    final response = await _requestRetry(
+      options,
+      newToken,
     );
+    onResponse(response);
   }
 
-  Future<Response> _requestRetry(
+  Future<Response<dynamic>> _requestRetry(
     RequestOptions requestOptions,
     T token,
   ) {
@@ -249,7 +251,7 @@ class TokenProtocol<T extends AuthToken> {
   final ShouldRefresh<T> shouldRefresh;
 
   static bool _shouldRefresh(
-    Response? response,
+    Response<dynamic>? response,
     dynamic _,
   ) {
     return response?.statusCode == 401;

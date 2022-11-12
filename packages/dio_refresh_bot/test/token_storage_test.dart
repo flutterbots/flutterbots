@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:dio_refresh_bot/dio_refresh_bot.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 class MockAuthToken extends Mock implements AuthToken {}
 
-class MockBotTokenStorage extends BotTokenStorage<MockAuthToken>
+class BotTokenStorageImpl extends BotTokenStorage<MockAuthToken>
     with RefreshBotMixin {
   MockAuthToken? storageValue;
 
@@ -117,10 +116,10 @@ void main() {
   });
 
   group('Bot Token Storage', () {
-    late MockBotTokenStorage botTokenStorage;
+    late BotTokenStorageImpl botTokenStorage;
 
     setUp(() {
-      botTokenStorage = MockBotTokenStorage();
+      botTokenStorage = BotTokenStorageImpl();
     });
 
     test('init token should be null and emit it', () {
@@ -138,8 +137,8 @@ void main() {
     });
 
     test(
-        'write should change mixin token value and emit it and change authenticationStatus',
-        () async {
+        'write should change mixin token value and emit it and '
+        'change authenticationStatus', () async {
       await botTokenStorage.write(mockAuthToken);
       expect(botTokenStorage.value, isA<MockAuthToken>());
       expect(botTokenStorage.stream, emits(isA<MockAuthToken>()));
@@ -157,6 +156,20 @@ void main() {
       expect(
         botTokenStorage.authenticationStatus.map((event) => event.status),
         emits(Status.unauthenticated),
+      );
+    });
+
+    test('Closed stream', () async {
+      await botTokenStorage.write(mockAuthToken);
+      botTokenStorage.close();
+      await expectLater(
+        botTokenStorage.authenticationStatus.map<Status>(
+          (event) => event.status,
+        ),
+        emitsInOrder(<Matcher>[
+          equals(Status.authenticated),
+          emitsDone,
+        ]),
       );
     });
   });
