@@ -28,4 +28,4 @@ jobs:
        - name: uploads covreage report
          run: curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
-          ./codecov -t ${CODECOV_TOKEN}
+          ./codecov -t 7c0f8a0f-886d-4425-bec4-53ece77bf450
