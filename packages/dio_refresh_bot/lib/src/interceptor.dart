@@ -170,13 +170,12 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
       if (error is! DioError) {
         dioError = DioError(
           requestOptions: options,
+          stackTrace: stackTrace,
           error: error,
         );
       } else {
         dioError = error;
       }
-
-      dioError.stackTrace = stackTrace;
 
       if (tokenProtocol.shouldRevokeToken(dioError)) {
         await tokenStorage.delete(onRevoked?.call(dioError));
