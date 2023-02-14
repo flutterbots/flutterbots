@@ -104,7 +104,7 @@ void main() {
       botTokenStorage = BotTokenStorageImpl();
       requestInterceptorHandler = MockRequestInterceptorHandler();
       errorInterceptorHandler = MockErrorInterceptorHandler();
-      requestOptions = RequestOptions(path: '');
+      requestOptions = RequestOptions();
       refreshRequestOptions = MockRequestOptions();
       dioError = MockDioError();
       mockException = MockException();
