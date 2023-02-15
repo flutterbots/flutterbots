@@ -8,9 +8,9 @@ typedef RefreshToken<T> = Future<T> Function(T token, Dio tokenDio);
 /// Function to decide if we need to refresh token depending on [Response]
 /// and [token] value
 typedef ShouldRefresh<T> = bool Function(
-  Response<dynamic>? response,
-  T? token,
-);
+    Response<dynamic>? response,
+    T? token,
+    );
 
 /// Function to decide when we should revoke the token depending on [DioError]
 typedef ShouldRevoke = bool Function(DioError error);
@@ -50,6 +50,8 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
         ),
       );
     }
+    _tokenDio.options
+      ..headers = {'Content-Type': 'application/json; charset=UTF-8'};
   }
 
   /// This function called when we should refresh the token
@@ -87,10 +89,8 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   Dio get dio => _tokenDio;
 
   @override
-  Future<void> onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
+  Future<void> onRequest(RequestOptions options,
+      RequestInterceptorHandler handler,) async {
     var token = tokenStorage.read();
     if (token != null) {
       _buildHeader(options, token);
@@ -142,12 +142,11 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     );
   }
 
-  Future<void> _refreshHandler(
-    T storageToken,
-    RequestOptions options, {
-    required OnRefreshResponse onResponse,
-    required OnRefreshError onError,
-  }) async {
+  Future<void> _refreshHandler(T storageToken,
+      RequestOptions options, {
+        required OnRefreshResponse onResponse,
+        required OnRefreshError onError,
+      }) async {
     try {
       // if current storageToken not equal request token
       // then => refreshToken has done by another intercept process
@@ -185,11 +184,10 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     }
   }
 
-  Future<void> _refreshToken(
-    T token,
-    RequestOptions options, {
-    required OnRefreshResponse onResponse,
-  }) async {
+  Future<void> _refreshToken(T token,
+      RequestOptions options, {
+        required OnRefreshResponse onResponse,
+      }) async {
     final newToken = await refreshToken(token, _tokenDio);
     await tokenStorage.write(newToken);
 
@@ -200,10 +198,8 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     onResponse(response);
   }
 
-  Future<Response<dynamic>> _requestRetry(
-    RequestOptions requestOptions,
-    T token,
-  ) {
+  Future<Response<dynamic>> _requestRetry(RequestOptions requestOptions,
+      T token,) {
     return _tokenDio.fetch<dynamic>(
       requestOptions
         ..headers.addAll(
@@ -249,10 +245,8 @@ class TokenProtocol<T extends AuthToken> {
   ///
   final ShouldRefresh<T> shouldRefresh;
 
-  static bool _shouldRefresh(
-    Response<dynamic>? response,
-    dynamic _,
-  ) {
+  static bool _shouldRefresh(Response<dynamic>? response,
+      dynamic _,) {
     return response?.statusCode == 401;
   }
 
