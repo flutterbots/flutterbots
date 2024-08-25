@@ -1,6 +1,6 @@
 name: bot_storage
 description: A useful package provide an interface to handle read, write and delete operations in reactive way
-version: 1.0.5
+version: 1.1.0
 homepage: https://github.com/flutterbots/flutterbots
 
 environment:
@@ -8,12 +8,12 @@ environment:
 
 
 dependencies:
-  meta: ^1.7.0
-  rxdart: ^0.27.4
+  meta: ^1.15.0
+  rxdart: ^0.28.0
 
 
 dev_dependencies:
-  mocktail: ^0.3.0
-  test: ^1.21.1
-  very_good_analysis: ^3.0.0
+  mocktail: ^1.0.4
+  test: ^1.25.8
+  very_good_analysis: ^6.0.0
 
