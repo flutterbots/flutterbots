@@ -1,4 +1,6 @@
+## 1.1.0
 
+* chore: update packages
 
 ## 1.0.5
 

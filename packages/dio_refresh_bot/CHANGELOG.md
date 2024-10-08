@@ -1,3 +1,7 @@
+## 2.2.0
+
+- **CHORE**: updates packages.
+
 ## 2.1.2
 
 - **FIX**: build token header for `onRequest`.
