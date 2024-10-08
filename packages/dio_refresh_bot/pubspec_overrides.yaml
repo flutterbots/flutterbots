@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: bot_storage
+dependency_overrides:
+  bot_storage:
+    path: ../bot_storage

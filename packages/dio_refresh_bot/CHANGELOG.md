@@ -1,3 +1,7 @@
+## 2.2.1
+
+- **FIX**: downgrades metadata to 1.12.0.
+
 ## 2.2.0
 
 - **CHORE**: updates packages.

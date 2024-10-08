@@ -1,3 +1,7 @@
+## 1.1.1
+
+* fix: downgrade metadata to 1.12.0
+
 ## 1.1.0
 
 * chore: update packages
