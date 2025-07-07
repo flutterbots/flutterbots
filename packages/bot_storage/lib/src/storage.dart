@@ -16,13 +16,16 @@ typedef DeleteCallback<T> = FutureOr<void> Function();
 /// read, write, and delete the `value`.
 abstract class BotStorage<T> {
   /// Returns the stored data.
-  T? read();
+  FutureOr<T?> read();
 
   /// Saves the provided [value] asynchronously.
   FutureOr<void> write(T? value);
 
   /// Deletes the stored data asynchronously.
   FutureOr<void> delete();
+
+  /// Initialize BotStorage
+  FutureOr<void> init() {}
 }
 
 /// Memory storage implementation for [BotStorage]
@@ -121,10 +124,40 @@ class BotMemoryStorageWrapper<T> extends BotMemoryStorage<T> {
 
 /// Mixin that added reactive behavior to [BotStorage]
 mixin BotStorageMixin<T> on BotStorage<T> {
-  late T? _value = read();
+  late T? _value;
 
-  late final BehaviorSubject<T?> _controller =
-      BehaviorSubject<T?>.seeded(_value);
+  BehaviorSubject<T?>? __controller;
+
+  BehaviorSubject<T?> get _controller {
+    if (__controller == null) {
+      throw StateError(
+        'BotStorage stream not initialized. Call initValueStream() first.',
+      );
+    }
+
+    return __controller!;
+  }
+
+  /// Initializes the internal value stream by reading the current
+  /// value asynchronously.
+  ///
+  /// This method must be called before accessing the reactive stream or
+  /// `_value`.
+  /// Typically used to support async initialization in [BotStorageMixin]
+  @override
+  @mustCallSuper
+  Future<void> init() async {
+    await super.init();
+
+    if (__controller != null) {
+      throw StateError(
+        'BotStorage stream already initialized.',
+      );
+    }
+
+    _value = await read();
+    __controller = BehaviorSubject<T?>.seeded(_value);
+  }
 
   /// Notifies about changes to any [value] updates.
   Stream<T?> get stream => _controller.stream;
@@ -135,6 +168,7 @@ mixin BotStorageMixin<T> on BotStorage<T> {
   @override
   @mustCallSuper
   void write(T? value) {
+    _value = value;
     _controller.add(value);
   }
 

@@ -61,11 +61,44 @@ mixin RefreshBotMixin<T extends AuthToken> on BotTokenStorageType<T> {
   ///
   AuthStatus authStatus = AuthStatus.initial();
 
-  late final BehaviorSubject<AuthStatus> _controller =
-      BehaviorSubject<AuthStatus>.seeded(_getStatus(read()));
+  BehaviorSubject<AuthStatus>? __controller;
+
+  BehaviorSubject<AuthStatus> get _controller {
+    if (__controller == null) {
+      throw StateError(
+        'Auth stream not initialized. Call initValueStream() first.',
+      );
+    }
+
+    return __controller!;
+  }
 
   ///
   Stream<AuthStatus> get authenticationStatus => _controller.stream;
+
+  /// Initializes the internal value stream by reading the current
+  /// value asynchronously.
+  ///
+  /// This method must be called before accessing the reactive stream or
+  /// `_value`.
+  /// Typically used to support async initialization in [BotStorageMixin]
+  /// Initializes the internal value stream by reading the current
+  /// value asynchronously.
+  ///
+  /// This method must be called before accessing the reactive stream or
+  /// `_value`.
+  /// Typically used to support async initialization in [BotStorageMixin]
+  @override
+  Future<void> init() async {
+    await super.init();
+    if (__controller != null) {
+      throw StateError(
+        'Auth stream already initialized.',
+      );
+    }
+
+    __controller = BehaviorSubject<AuthStatus>.seeded(_getStatus(await read()));
+  }
 
   void _setToken(T? token) {
     _updateStatus(token);

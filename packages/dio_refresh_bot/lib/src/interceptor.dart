@@ -12,14 +12,14 @@ typedef ShouldRefresh<T> = bool Function(
   T? token,
 );
 
-/// Function to decide when we should revoke the token depending on [DioError]
-typedef ShouldRevoke = bool Function(DioError error);
+/// Function to decide when we should revoke the token depending on [DioException]
+typedef ShouldRevoke = bool Function(DioException error);
 
 /// Function for Taking the the an action when the token is revoked
 ///
 /// from this function we can return meaningful message
 ///
-typedef RevokeCallback = String? Function(DioError error);
+typedef RevokeCallback = String? Function(DioException error);
 
 /// Function responsible for building the token header.
 typedef TokenHeaderBuilder<T> = Map<String, String> Function(T token);
@@ -28,7 +28,7 @@ typedef TokenHeaderBuilder<T> = Map<String, String> Function(T token);
 typedef OnRefreshResponse = void Function(Response<dynamic> response);
 
 ///
-typedef OnRefreshError = void Function(DioError error);
+typedef OnRefreshError = void Function(DioException error);
 
 ///
 class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
@@ -43,7 +43,7 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     this.tokenHeaderBuilder,
   }) : _tokenDio = tokenDio ?? Dio() {
     _tokenDio.options.headers = {
-      'Content-Type': 'application/json; charset=UTF-8'
+      'Content-Type': 'application/json; charset=UTF-8',
     };
 
     if (debugLog && tokenDio == null) {
@@ -95,15 +95,15 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    var token = tokenStorage.read();
+    var token = await tokenStorage.read();
     if (token != null) {
       _buildHeader(options, token);
       if (tokenProtocol.shouldRefresh(null, token)) {
         await _refreshHandler(
           token,
           options,
-          onResponse: (response) {
-            token = tokenStorage.read();
+          onResponse: (response) async {
+            token = await tokenStorage.read();
             _buildHeader(options, token!);
             handler.resolve(response);
           },
@@ -125,9 +125,12 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
   }
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     final response = err.response;
-    final storageToken = tokenStorage.read();
+    final storageToken = await tokenStorage.read();
 
     if (storageToken == null ||
         !tokenProtocol.shouldRefresh(response, storageToken)) {
@@ -169,10 +172,10 @@ class RefreshTokenInterceptor<T extends AuthToken> extends QueuedInterceptor {
         );
       }
     } catch (error, stackTrace) {
-      late final DioError dioError;
+      late final DioException dioError;
 
-      if (error is! DioError) {
-        dioError = DioError(
+      if (error is! DioException) {
+        dioError = DioException(
           requestOptions: options,
           stackTrace: stackTrace,
           error: error,
@@ -240,7 +243,7 @@ class TokenProtocol<T extends AuthToken> {
 
   /// [shouldRevokeToken] - check if we should revoke token.
   ///
-  /// If refresh token throw [DioError] we should revoke the
+  /// If refresh token throw [DioException] we should revoke the
   /// token for specific errors.
   ///
   /// the default when the response status code is 403 or 401
@@ -260,7 +263,7 @@ class TokenProtocol<T extends AuthToken> {
     return response?.statusCode == 401;
   }
 
-  static bool _shouldRevokeToken(DioError error) {
+  static bool _shouldRevokeToken(DioException error) {
     final response = error.response;
     return response?.statusCode == 403 || response?.statusCode == 401;
   }

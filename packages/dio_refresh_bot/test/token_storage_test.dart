@@ -47,8 +47,10 @@ void main() {
   group('Bot Memory Token Storage', () {
     late BotMemoryTokenStorageImpl botMemoryTokenStorage;
 
-    setUp(() {
+    setUp(() async {
       botMemoryTokenStorage = BotMemoryTokenStorageImpl();
+
+      await botMemoryTokenStorage.init();
     });
 
     test('init token should be null and emit it', () {
@@ -118,8 +120,10 @@ void main() {
   group('Bot Token Storage', () {
     late BotTokenStorageImpl botTokenStorage;
 
-    setUp(() {
+    setUp(() async {
       botTokenStorage = BotTokenStorageImpl();
+
+      await botTokenStorage.init();
     });
 
     test('init token should be null and emit it', () {

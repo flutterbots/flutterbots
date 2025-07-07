@@ -34,7 +34,7 @@ void main() {
     late MockResponse<Object> mockResponse;
     late MockAuthToken mockAuthToken;
     late MockDioError mockDioError;
-    setUp(() {
+    setUp(() async {
       tokenProtocol = const TokenProtocol();
       mockResponse = MockResponse<Object>();
       mockAuthToken = MockAuthToken();
@@ -100,8 +100,9 @@ void main() {
     late MockAuthToken mockAuthToken;
     late MockAuthToken newMockAuthToken;
     late MockDio dio;
-    setUp(() {
+    setUp(() async {
       botTokenStorage = BotTokenStorageImpl();
+      await botTokenStorage.init();
       requestInterceptorHandler = MockRequestInterceptorHandler();
       errorInterceptorHandler = MockErrorInterceptorHandler();
       requestOptions = RequestOptions();
